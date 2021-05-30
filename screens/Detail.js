@@ -108,7 +108,6 @@ export default class Flat extends Component {
                     all2: detailcost,*/
                 title="sepete ekle"
                 color="#841584"
-                accessibilityLabel="Learn more about this purple button"
               />
             </View>
           </View>

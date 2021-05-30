@@ -63,13 +63,17 @@ export default class Register extends Component {
           <View style={styles.headBackground}>
             <View>
               <Image
-                style={{width: 250, height: 75, marginTop: 40, marginLeft: 80}}
-                //source={require('../assets/profilfoto.jpg')}
+                style={{width: 230, height: 175, marginLeft: 85}}
+                source={require('../assets/logo.png')}
               />
               <Text style={styles.logoDescription}>Girls are power!</Text>
             </View>
           </View>
           <ScrollView>
+            {/*<Image*/}
+            {/*  style={styles.imageKampanya}*/}
+            {/*  source={require('../assets/logo.png')}*/}
+            {/*/>*/}
             <View style={styles.RegisterArea}>
               <View>
                 <TextInput
@@ -129,15 +133,14 @@ export default class Register extends Component {
                   </View>
                 </TouchableOpacity>
                 <Button
-                  color={'#f1f1f1'}
-                  backgroundColor={'#660099'}
+                  color={'#808C79'}
                   title={'Aramıza katıl'}
                   onPress={() => this.InsertData()}
                 />
                 <TouchableOpacity
                 //onPress={() => this.props.navigation.navigate('deneme')}
                 >
-                  <Text style={{fontSize: 16, color: 'red', marginLeft: 70}}>
+                  <Text style={{fontSize: 16, color: 'black', marginLeft: 70}}>
                     Zaten Üye misin? Giriş Yap
                   </Text>
                 </TouchableOpacity>
@@ -153,7 +156,7 @@ export default class Register extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFFFF',
   },
   headBackground: {
     position: 'absolute',
@@ -161,7 +164,7 @@ const styles = StyleSheet.create({
     left: 0,
     height: 250,
     width: '100%',
-    backgroundColor: '#660099',
+    backgroundColor: '#FFFFFF',
   },
   logo: {
     marginTop: 50,
@@ -196,6 +199,6 @@ const styles = StyleSheet.create({
   },
   buttonTitle: {
     fontSize: 14,
-    color: 'red',
+    color: 'black',
   },
 });

@@ -141,7 +141,7 @@ const AppNavigator = createStackNavigator(
   },
   {
     headerMode: 'none',
-    initialRouteName: 'deneme',
+    initialRouteName: 'Auth',
   },
 );
 

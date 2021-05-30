@@ -8,6 +8,7 @@ import {
   Button,
   TextInput,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
 export default class KategoriScreen extends Component {
@@ -16,28 +17,28 @@ export default class KategoriScreen extends Component {
     return (
       <View style={styles.container}>
         <TextInput placeholder="Search..." style={styles.searchInput} />
-        <View style={styles.buttonsGenel}>
-          <TouchableOpacity style={styles.buttonsSol}>
-            <Text style={styles.kategoriText}>Yemek</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonsSol}>
-            <Text style={styles.kategoriText}>Dekorasyon</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonsSol}>
-            <Text style={styles.kategoriText}>El İşi</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonsSol}>
-            <Text style={styles.kategoriText}>Hediyelik</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonsSol}>
-            <Text style={styles.kategoriText}>Bebek</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonsSol}>
-            <Text style={styles.kategoriText}>Organik</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonsSol}>
-            <Text style={styles.kategoriText}>Diyet</Text>
-          </TouchableOpacity>
+        <View style={styles.genel}>
+          <View style={styles.buttonsGenel}>
+            <TouchableOpacity style={styles.buttonsSol}>
+              <Text style={styles.kategoriText}>Yemek</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonsSol}>
+              <Text style={styles.kategoriText}>Dekorasyon</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonsSol}>
+              <Text style={styles.kategoriText}>El İşi</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonsSol}>
+              <Text style={styles.kategoriText}>Bebek</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonsSol}>
+              <Text style={styles.kategoriText}>Diyet</Text>
+            </TouchableOpacity>
+          </View>
+          <Image
+            style={{width: 260, height: 195, marginTop: 175}}
+            source={require('../assets/logo.png')}
+          />
         </View>
       </View>
     );
@@ -46,7 +47,7 @@ export default class KategoriScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFFFF',
   },
   searchInput: {
     fontSize: 16,
@@ -57,8 +58,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginTop: 1,
   },
+  genel: {
+    flexDirection: 'row',
+  },
   kategoriText: {
-    fontSize: 14,
+    fontSize: 18,
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
@@ -69,13 +73,14 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
   buttonsSol: {
-    width: 110,
-    height: 71.6,
+    width: 175,
+    height: 110,
     backgroundColor: '#fff',
     borderColor: '#d5d5d5',
     borderWidth: 1,
     padding: 15,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 1,
   },
 });

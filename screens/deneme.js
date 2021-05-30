@@ -29,7 +29,7 @@ export default class deneme extends Component {
 
   componentDidMount() {
     axios.get('http://213.159.30.21/service/api/Urun/').then((user) => {
-      //console.log(user);
+      console.log(user);
       this.setState({
         all: user.data,
       });
@@ -84,24 +84,8 @@ export default class deneme extends Component {
     const {name, surname, resim, loading} = this.state;
     return (
       <SafeAreaView style={styles.container}>
-        {/*<Button*/}
-        {/*  title="go to flat page"*/}
-        {/*  onPress={() =>*/}
-        {/*    navigate('Profile', {*/}
-        {/*      //username: 'Safa',*/}
-        {/*      //password: '2317',*/}
-        {/*    })*/}
-        {/*  }*/}
-        {/*/>*/}
-        {/*<FlatListExample />*/}
         <View>
-          {loading ? (
-            <Text>Loading...</Text>
-          ) : (
-            <Text>{/*{name} {surname}*/}</Text>
-          )}
         </View>
-        {/*<Image style={styles.avatar} source={{uri: resim}} />*/}
         <FlatList
           ListFooterComponent={this.renderFooter}
           numColumns={2}
@@ -121,11 +105,12 @@ const styles = StyleSheet.create({
   },
   general: {
     flex: 1,
-    marginHorizontal: 5,
+    marginHorizontal: 10,
+    marginVertical: -12,
   },
   avatar: {
     width: 185,
-    height: 185,
+    height: 170,
   },
   name: {
     fontSize: 19,
@@ -133,7 +118,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   searchContainer: {
-    marginVertical: 5,
     padding: 10,
     borderWidth: 1,
     borderColor: '#969696',
