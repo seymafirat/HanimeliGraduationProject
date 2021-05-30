@@ -13,82 +13,66 @@ import {
   SafeAreaView,
 } from 'react-native';
 import axios from 'axios';
-import SaticiProfil from './SaticiProfil';
+//import SaticiProfil from './SaticiProfil';
 
 const isIos = Platform.OS === 'ios';
 
 export default class AnasayfaScreen extends Component {
   state = {
-    text: '',
-    page: 1,
-    contacts: [],
-    allContacts: [],
-    loading: true,
-    refreshing: false,
+    resim: '',
+    all: [],
+    // text: '',
+    // page: 1,
+    // contacts: [],
+    // allContacts: [],
+    // loading: true,
+    // refreshing: false,
   };
 
   componentDidMount() {
-    this.getContacts();
+    axios.get('http://213.159.30.21/service/api/Urun/').then((user) => {
+      console.log(user);
+      this.setState({
+        all: user.data,
+      });
+    });
   }
+  // loadMore = () => {
+  //   if (!this.duringMomentum) {
+  //     this.setState(
+  //       {
+  //         page: this.state.page + 1,
+  //       },
+  //       () => {
+  //         this.getContacts();
+  //       },
+  //     );
+  //     this.duringMomentum = false;
+  //   }
+  // };
 
-  getContacts = async () => {
-    this.setState({
-      loading: true,
-    });
-    const {
-      data: {results: contacts},
-    } = await axios.get(
-      `https://randomuser.me/api/?results=30&page=${this.state.page}`,
-    );
-    if (this.state.refreshing) {
-      users.reverse();
-    }
-
-    const users = [...this.state.contacts, ...contacts]; //3 nokta arraydekileri yerleştirmesi için
-    this.setState({
-      contacts: users,
-      allContacts: users,
-      loading: false,
-      refreshing: false,
-    });
-  };
-
-  loadMore = () => {
-    if (!this.duringMomentum) {
-      this.setState(
-        {
-          page: this.state.page + 1,
-        },
-        () => {
-          this.getContacts();
-        },
-      );
-      this.duringMomentum = false;
-    }
-  };
-
-  onRefresh = () => {
-    this.setState(
-      {
-        page: 1,
-        refreshing: true,
-      },
-      () => {
-        this.getContacts();
-      },
-    );
-  };
-  gotoDetail = (user) => {
-    this.props.navigation.navigate('SaticiProfil', {
-      user,
-    });
-  };
+  // onRefresh = () => {
+  //   this.setState(
+  //     {
+  //       page: 1,
+  //       refreshing: true,
+  //     },
+  //     () => {
+  //       this.getContacts();
+  //     },
+  //   );
+  // };
+  // gotoDetail = (user) => {
+  //   this.props.navigation.navigate('SaticiProfil', {
+  //     user,
+  //   });
+  // };
 
   renderContactsItem = ({item, index}) => {
     return (
       <SafeAreaView>
         <TouchableOpacity
-          onPress={() => this.gotoDetail(item)}
+          // onPress={() => this.gotoDetail(item)}
           style={[
             styles.itemContainer,
             {backgroundColor: index % 2 === 1 ? '#fafafa' : ''},
@@ -99,24 +83,21 @@ export default class AnasayfaScreen extends Component {
                 <View style={styles.imageAndKullaniciad}>
                   <Image
                     style={styles.imageBack}
-                    source={{uri: item.picture.thumbnail}}
+                    source={require('../assets/profilfoto.jpg')}
                   />
-                  <Text style={styles.kullaniciAdi}>
-                    {item.name.first} {item.name.last}
-                  </Text>
+                  {/*<Text style={styles.kullaniciAdi}>*/}
+                  {/*  {item.name.first} {item.name.last}*/}
+                  {/*</Text>*/}
                 </View>
-                <Image
-                  style={styles.avatar}
-                  source={{uri: item.picture.thumbnail}}
-                />
+                <Image style={styles.avatar} source={{uri: item.resim}} />
                 <View style={styles.ustbanner2}>
                   <Image
                     style={styles.imageYildiz}
-                    source={{uri: item.picture.thumbnail}}
+                    source={{uri: item.resim}}
                   />
                   <Image
                     style={styles.imageYildiz}
-                    source={{uri: item.picture.thumbnail}}
+                    source={{uri: item.resim}}
                   />
                 </View>
                 <TouchableOpacity>
@@ -145,12 +126,13 @@ export default class AnasayfaScreen extends Component {
       <FlatList
         ListFooterComponent={this.renderFooter}
         renderItem={this.renderContactsItem}
-        keyExtractor={(item) => item.login.uuid}
-        data={this.state.contacts}
-        onEndReached={this.loadMore}
-        onEndReachedThreshold={isIos ? 0 : 0.2}
-        refreshing={this.state.refreshing}
-        onRefresh={this.onRefresh}
+        numColumns={2}
+        //keyExtractor={(item) => item.login.uuid}
+        data={this.state.all}
+        // onEndReached={this.loadMore}
+        // onEndReachedThreshold={isIos ? 0 : 0.2}
+        // refreshing={this.state.refreshing}
+        // onRefresh={this.onRefresh}
       /> //arama için işlem yapılmadı.
     );
   }
