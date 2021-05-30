@@ -5,6 +5,7 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -39,6 +40,7 @@ class Login extends React.Component {
         (res) => {
           AsyncStorage.setItem('token', res.data.access).then((res) => {
             alert('Login successful');
+            console.log(req);
             //this.props.navigation.navigate('Dashboard');
             this.setState({
               isLoading: false,
@@ -61,6 +63,10 @@ class Login extends React.Component {
     const {username, password, isLoading} = this.state;
     return (
       <View style={styles.container}>
+        <Image
+          style={{width: 230, height: 175, marginLeft: 45}}
+          source={require('../assets/logo.png')}
+        />
         <View style={styles.loginWrap}>
           <TextInput
             style={styles.inputs}
@@ -81,7 +87,7 @@ class Login extends React.Component {
             activeOpacity={0.8}
             style={{
               ...styles.loginBtn,
-              backgroundColor: isLoading ? '#ddd' : '#0070f3',
+              backgroundColor: isLoading ? '#ddd' : '#808C79',
             }}
             onPress={() => {
               this.onLoginSubmit();
@@ -103,6 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
   },
   loginWrap: {
     width: '80%',
