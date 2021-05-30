@@ -83,7 +83,7 @@ export default class AnasayfaScreen extends Component {
                 <View style={styles.imageAndKullaniciad}>
                   <Image
                     style={styles.imageBack}
-                    source={require('../assets/profilfoto.jpg')}
+                    source={require('../assets/images/profilfoto.jpg')}
                   />
                   {/*<Text style={styles.kullaniciAdi}>*/}
                   {/*  {item.name.first} {item.name.last}*/}
