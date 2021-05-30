@@ -139,7 +139,7 @@ const AppNavigator = createStackNavigator(
   },
   {
     headerMode: 'none',
-    initialRouteName: 'Detail',
+    initialRouteName: 'deneme',
   },
 );
 

@@ -79,7 +79,6 @@ export default class CameraAndGallery extends Component {
           avatarSource: source,
           loading: false,
         });
-        //console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -98,7 +97,6 @@ export default class CameraAndGallery extends Component {
       adi,
       kategori,
     });
-    //this.props.navigation.navigate('OnizlemeEkrani', foto);
   };
   requestWriteExternalStoragePermission = async () => {
     try {
@@ -107,9 +105,9 @@ export default class CameraAndGallery extends Component {
       );
 
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        //console.log('You can use the camera');
+        console.log('You can use the camera');
       } else {
-        //console.log('Camera permission denied');
+        console.log('Camera permission denied');
       }
     } catch (err) {
       console.warn(err);
@@ -140,10 +138,6 @@ export default class CameraAndGallery extends Component {
         });
     }
   };
-  /*navigateToInformationPage = (foto) => {
-    this.props.navigation.navigate('AciklamaEkrani', foto);
-    //this.props.navigation.navigate('OnizlemeEkrani', foto);
-  };*/
   change(nativeEvent) {
     if (nativeEvent) {
       const slide = Math.ceil(
@@ -267,17 +261,8 @@ export default class CameraAndGallery extends Component {
               allowsEditing: true, //olmuyo cunku androidde yok
             },
           };
-          //console.log('İzin verildi');
           launchImageLibrary(options, (response) => {
             console.log('Response = ', response);
-            //const source = {uri: response.uri};
-            console.log('of niye olmuyo ya');
-            /*this.setState({
-              avatarSource: source,
-            });*/
-            //upload başarılı değilse görünmesin diye yorum satırı yaptım
-            //this.cropLast(source);
-            //this.cropLast();
             this.uploadPhoto(response);
             console.log('nolcak');
             //}
@@ -389,7 +374,6 @@ const styles = StyleSheet.create({
   },
   preview: {
     height: width,
-    //marginTop: 15,
   },
   button: {
     backgroundColor: 'blue',

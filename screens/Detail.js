@@ -16,14 +16,57 @@ import axios from 'axios';
 export default class Flat extends Component {
   state = {};
 
-  componentDidMount() {
+  /* componentDidMount() {
     axios.get('http://213.159.30.21/service/api/Urun/').then((user) => {
-      console.log(user);
+      //console.log(user);
       this.setState({
         all: user.data,
       });
     });
-  }
+  }*/
+  InsertData = () => {
+    const {navigate} = this.props.navigation;
+    const {navigation} = this.props;
+    const detailname2 = navigation.getParam('detailname2');
+    const detailcost2 = navigation.getParam('detailcost2');
+    const detailimage2 = navigation.getParam('detailimage2');
+    fetch('http://213.159.30.21/service/api/Sepet/', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        //userid: 4,
+        //username: userid.username,
+        //stok: 5,
+        //kategoriId: 2,
+        //altkategoriId: 2,
+        //adi,
+        //aciklama,
+        //fiyat,
+        adi: detailname2,
+        fiyat: detailcost2,
+        resim: detailimage2,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log('ok');
+        //console.log(data);
+        this.props.navigation.navigate('Profile', {
+          //apiRequestUrl: JSON.parse(data.id),
+          detailimage2,
+          detailname2,
+          detailcost2,
+          //kategori: 'Yemek',
+        });
+        //console.log('seyma' + JSON.parse(data.id));
+        //this.props.navigation.navigate('OnizlemeEkrani', data.aciklama);
+        //Alert.alert('adi:' + data.adi + 'aciklama:' + data.aciklama);
+      })
+      .catch((error) => console.log(error));
+  };
   renderContactsItem = ({item, index}) => {
     const {navigate} = this.props.navigation;
     const {navigation} = this.props;
@@ -57,14 +100,12 @@ export default class Flat extends Component {
             <Text style={styles.name}>{detailaciklama} </Text>
             <View style={styles.sepeteklebuton}>
               <Button
-                onPress={() => {
-                  navigate('Profile', {
+                onPress={() => this.InsertData()}
+                /*navigate('Profile', {
                     detailname2: detailname,
                     detailcost2: detailcost,
                     detailimage2: detailimage,
-                    all2: detailcost,
-                  });
-                }}
+                    all2: detailcost,*/
                 title="sepete ekle"
                 color="#841584"
                 accessibilityLabel="Learn more about this purple button"

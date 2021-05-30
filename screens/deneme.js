@@ -29,7 +29,7 @@ export default class deneme extends Component {
 
   componentDidMount() {
     axios.get('http://213.159.30.21/service/api/Urun/').then((user) => {
-      console.log(user);
+      //console.log(user);
       this.setState({
         all: user.data,
       });
@@ -56,7 +56,7 @@ export default class deneme extends Component {
           //     item.location.state,
           //   //item.picture.thumbnail,
           // });
-          console.log(item);
+          //console.log(item);
         }}
         style={[
           styles.itemContainer,
