@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-//import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Flat from './Flat';
 import Profile from './Profile';
 import Detail from './Detail';
@@ -23,7 +23,7 @@ import Dashboard from './Dashboard';
 import AuthLoading from './AuthLoadingScreen';
 import Register from './Register';
 import Anasayfa from './AnasayfaScreen';
-//import Satici from './SaticiProfil';
+import Satici from './SaticiProfil';
 import Ayarlar from './AyarlarScreen';
 import Kampanya from './Campaign';
 import Campaign from './Campaign';
@@ -41,6 +41,8 @@ import KategoriSecme from './KategoriSecme';
 import CameraAndGallery from './CameraAndGallery';
 import OnizlemeEkrani from './OnizlemeEkrani';
 //import SaticiProfil from './SaticiProfil';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 const BeforeSignin = createStackNavigator(
   {
     Login: {
@@ -64,52 +66,52 @@ const AfterSignin = createStackNavigator(
     initialRouteName: 'Dashboard',
   },
 );
-/*const TabNavigator = createBottomTabNavigator({
+const TabNavigator = createBottomTabNavigator({
   Anasayfa: {
-    screen: Anasayfa,
-    // navigationOptions: {
-    //   tabBarIcon: ({tintColor}) => (
-    //     <Icon name="home" size={22} color={tintColor} />
-    //   ),
-    // },
+    screen: Home,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => (
+        <Icon name="home" size={22} color={tintColor} />
+      ),
+    },
   },
   Kategoriler: {
     screen: KategoriScreen,
-    // navigationOptions: {
-    //   tabBarIcon: ({tintColor}) => (
-    //     <Icon name="search" size={22} color={tintColor} />
-    //   ),
-    // },
-  },
-  Favoriler: {
-    screen: Campaign,
-    // navigationOptions: {
-    //   tabBarIcon: ({tintColor}) => (
-    //     <Icon name="heart" size={22} color={tintColor} />
-    //   ),
-    // },
-  },
-  Siparişler: {
-    screen: Foods,
-    // navigationOptions: {
-    //   tabBarIcon: ({tintColor}) => (
-    //     <Icon name="shopping-basket" size={22} color={tintColor} />
-    //   ),
-    // },
-  },
-  Profil: {
-    screen: Announcement,
     navigationOptions: {
-      backgroundColor: '#FFF7A2',
-      // tabBarIcon: ({tintColor}) => (
-      //   <Icon name="user" size={22} color={tintColor} />
-      // ),
+      tabBarIcon: ({tintColor}) => (
+        <Icon name="search" size={22} color={tintColor} />
+      ),
     },
   },
-});*/
+  Favoriler: {
+    screen: deneme,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => (
+        <Icon name="heart" size={22} color={tintColor} />
+      ),
+    },
+  },
+  Siparişler: {
+    screen: CampaignAnnounc,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => (
+        <Icon name="shopping-basket" size={22} color={tintColor} />
+      ),
+    },
+  },
+  Profil: {
+    screen: CampaignAnnounc,
+    navigationOptions: {
+      backgroundColor: '#FFF7A2',
+      tabBarIcon: ({tintColor}) => (
+        <Icon name="user" size={22} color={tintColor} />
+      ),
+    },
+  },
+});
 const AppNavigator = createStackNavigator(
   {
-    //Auth: BeforeSignin,
+    Auth: BeforeSignin,
     //App: AfterSignin,
     AuthLoading: AuthLoading,
     Flat: Flat,
@@ -118,7 +120,7 @@ const AppNavigator = createStackNavigator(
     deneme: deneme,
     Register: Register,
     Anasayfa: Anasayfa,
-    //Satici: TabNavigator,
+    Satici: TabNavigator,
     Ayarlar: Ayarlar,
     Kampanya: Kampanya,
     Campaign: Campaign,
@@ -127,7 +129,7 @@ const AppNavigator = createStackNavigator(
     PasswordInfo: PasswordInfo,
     UserInfo: UserInfo,
     AddressInfo: AddressInfo,
-    Home: Home,
+    Home: TabNavigator,
     ProfilScreen: ProfilScreen,
     AciklamaEkrani: AciklamaEkrani,
     KategoriSecme: KategoriSecme,

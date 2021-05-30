@@ -39,7 +39,7 @@ class Login extends React.Component {
         (res) => {
           AsyncStorage.setItem('token', res.data.access).then((res) => {
             alert('Login successful');
-            this.props.navigation.navigate('Dashboard');
+            //this.props.navigation.navigate('Dashboard');
             this.setState({
               isLoading: false,
             });
@@ -62,7 +62,6 @@ class Login extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.loginWrap}>
-          <Text style={styles.heading}>Welcome Back User</Text>
           <TextInput
             style={styles.inputs}
             placeholder="Enter username"

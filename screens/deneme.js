@@ -69,7 +69,7 @@ export default class deneme extends Component {
               <Text style={styles.name}>
                 {item.adi} {'\n'}
                 {item.fiyat} TL {'\n'}
-                {item.userid.username} TL {'\n'}
+                {/*{item.userid.username} TL {'\n'}*/}
               </Text>
             </View>
           </View>
