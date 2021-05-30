@@ -41,6 +41,8 @@ import KategoriSecme from './KategoriSecme';
 import CameraAndGallery from './CameraAndGallery';
 import OnizlemeEkrani from './OnizlemeEkrani';
 //import SaticiProfil from './SaticiProfil';
+import LocalNotification from './LocalNotification';
+import detayekrani from './detayekrani';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const BeforeSignin = createStackNavigator(
@@ -135,15 +137,16 @@ const AppNavigator = createStackNavigator(
     KategoriSecme: KategoriSecme,
     CameraAndGallery: CameraAndGallery,
     OnizlemeEkrani: OnizlemeEkrani,
+    LocalNotification: LocalNotification,
+    detayekrani: detayekrani,
     Foods: Foods,
     KategoriScreen: KategoriScreen,
     //SaticiProfil: SaticiProfil,
   },
   {
     headerMode: 'none',
-    initialRouteName: 'deneme',
+    initialRouteName: 'AciklamaEkrani',
   },
 );
 
 export default createAppContainer(AppNavigator);
-//pnar_bedir p23172317

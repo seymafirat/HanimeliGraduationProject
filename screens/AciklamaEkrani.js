@@ -184,13 +184,8 @@ export default class AciklamaEkrani extends Component {
               placeholder="Ürünün fiyatını girin"
             />
           </View>
-          <View style={[{width: '93%', margin: 15, backgroundColor: 'red'}]}>
-            <Button
-              onPress={() => this.InsertData()}
-              title="Get Value"
-              color="#00B0FF"
-            />
-          </View>
+          <View
+            style={[{width: '93%', margin: 15, backgroundColor: 'red'}]}></View>
         </ScrollView>
       </View>
     );

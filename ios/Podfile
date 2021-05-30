@@ -10,6 +10,10 @@ target 'CropPicker' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'CropPickerTests' do
     inherit! :complete
     # Pods for testing

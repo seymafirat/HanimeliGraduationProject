@@ -47,38 +47,6 @@ export default class detayekrani extends Component {
     }
   }
 
-  componentDidMount() {
-    this.extractRequiredImageData();
-  }
-
-  extractRequiredImageData = () => {
-    let imageData = this.props.navigation.state.params;
-    let imageList = [];
-
-    for (let i = 0; i < Object.keys(imageData).length; i++) {
-      let data = imageData[String(i)];
-      let image = {
-        id: String(i),
-        contentType: data.mime,
-        fileSize: data.size,
-        filePath: data.path,
-      };
-      console.log(data.path);
-
-      if (Platform.OS === 'android') {
-        image.fileName = data.filename;
-      } else {
-        let path = data.path.split('/');
-        image.fileName = path[path.length - 1];
-      }
-
-      imageList.push(image);
-    }
-    this.setState({
-      imageList,
-    });
-  };
-
   render() {
     const {active} = this.state;
     return (
@@ -87,10 +55,10 @@ export default class detayekrani extends Component {
           <Card style={{flex: 0}}>
             <CardItem>
               <Left>
-                <Thumbnail source={require('./assets/profilfoto.jpg')} />
+                <Thumbnail source={require('../assets/avatar.png')} />
                 <Body>
                   <Text>NativeBase</Text>
-                  <Text note>April 15, 2016</Text>
+                  <Text note>May 30, 2021</Text>
                 </Body>
               </Left>
             </CardItem>
@@ -108,26 +76,12 @@ export default class detayekrani extends Component {
                       pagingEnabled
                       horizontal
                       style={styles.wrap}>
-                      {this.state.imageList.map((e, index) => (
-                        <Image
-                          key={index}
-                          resizeMode="stretch"
-                          style={styles.wrap}
-                          source={require('assets/ben/category-foods.jpg')}
-                        />
-                      ))}
+                      <Image
+                        resizeMode="stretch"
+                        style={styles.wrap}
+                        source={require('../assets/ben/category-foods.jpg')}
+                      />
                     </ScrollView>
-                    <View style={styles.wrapDot}>
-                      {this.state.imageList.map((e, index) => (
-                        <Text
-                          key={e}
-                          style={
-                            active === index ? styles.dotActive : styles.dot
-                          }>
-                          ●
-                        </Text>
-                      ))}
-                    </View>
                   </View>
                 </SafeAreaView>
                 <Text>//Your text here</Text>

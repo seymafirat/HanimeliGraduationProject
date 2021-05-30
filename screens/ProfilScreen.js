@@ -111,7 +111,7 @@ export default class ProfilScreen extends Component {
             //this.cropLast(source);
             //this.cropLast();
             this.uploadPhoto(response);
-            console.log('nolcak');
+            //console.log('nolcak');
             //}
           });
         } else {
@@ -167,18 +167,6 @@ export default class ProfilScreen extends Component {
           initialPage={0}
           renderTabBar={() => <ScrollableTabBar />}>
           <Text tabLabel="Ev Yemekleri">
-            <Image
-              source={avatarSource}
-              style={{width: 200, height: 200, marginLeft: 50}}
-            />
-            <Image
-              source={avatarSource}
-              style={{width: 200, height: 200, marginLeft: 50}}
-            />
-            <Image
-              source={avatarSource}
-              style={{width: 200, height: 200, marginLeft: 50}}
-            />
             <Image
               source={avatarSource}
               style={{width: 200, height: 200, marginLeft: 50}}
