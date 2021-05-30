@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-  KeyboardAvoidingView,
-} from 'react-native';
+// import {
+//   StyleSheet,
+//   View,
+//   Text,
+//   SafeAreaView,
+//   FlatList,
+//   Image,
+//   TouchableOpacity,
+//   TextInput,
+//   ScrollView,
+//   KeyboardAvoidingView,
+// } from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
@@ -23,7 +23,7 @@ import Dashboard from './Dashboard';
 import AuthLoading from './AuthLoadingScreen';
 import Register from './Register';
 import Anasayfa from './AnasayfaScreen';
-import Satici from './SaticiProfil';
+//import Satici from './SaticiProfil';
 import Ayarlar from './AyarlarScreen';
 import Kampanya from './Campaign';
 import Campaign from './Campaign';
