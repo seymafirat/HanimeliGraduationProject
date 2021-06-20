@@ -41,6 +41,7 @@
 // const AppContainer = createAppContainer(AppNavigator);
 //
 // //pnar_bedir p23172317
+
 import React from 'react';
 import {
   StyleSheet,
@@ -56,3 +57,18 @@ const App = () => {
 };
 
 export default App;
+// import React from 'react';
+// import {Provider} from 'react-redux';
+//
+// import {store} from './redux/store';
+// import RootNavigator from './navigation/RootNavigator';
+//
+// const App = () => {
+//   return (
+//     <Provider store={store}>
+//       <RootNavigator />
+//     </Provider>
+//   );
+// };
+//
+// export default App;

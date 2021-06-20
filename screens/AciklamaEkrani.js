@@ -184,8 +184,7 @@ export default class AciklamaEkrani extends Component {
               placeholder="Ürünün fiyatını girin"
             />
           </View>
-          <View
-            style={[{width: '93%', margin: 15, backgroundColor: 'red'}]}></View>
+          <View style={[{width: '93%', margin: 15, backgroundColor: 'red'}]} />
         </ScrollView>
       </View>
     );

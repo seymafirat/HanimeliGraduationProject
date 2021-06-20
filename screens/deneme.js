@@ -20,6 +20,7 @@ export default class deneme extends Component {
     surname: '',
     resim: '',
     all: [],
+    alldata: [],
     loading: true,
     detailname: '',
     detailcost: '',
@@ -28,10 +29,11 @@ export default class deneme extends Component {
   };
 
   componentDidMount() {
-    axios.get('http://213.159.30.21/service/api/Urun/').then((user) => {
+    axios.get('http://213.159.30.21/service/SepetEkle/').then((user) => {
       console.log(user);
       this.setState({
         all: user.data,
+        alldata: user.data,
       });
     });
   }
@@ -67,8 +69,10 @@ export default class deneme extends Component {
             <Image style={styles.avatar} source={{uri: item.resim}} />
             <View style={styles.textContainer}>
               <Text style={styles.name}>
-                {item.adi} {'\n'}
-                {item.fiyat} TL {'\n'}
+                {item.detail} {'\n'}
+                {item.urun} TL {'\n'}
+                {item.sepet} TL {'\n'}
+                {item.miktar} TL {'\n'}
                 {/*{item.userid.username} TL {'\n'}*/}
               </Text>
             </View>
@@ -77,17 +81,54 @@ export default class deneme extends Component {
       </TouchableOpacity>
     );
   };
+  searchFilter = (text) => {
+    const newData = this.state.alldata.filter((item) => {
+      const listItem = `${item.adi.toLowerCase()}`;
 
+      return listItem.indexOf(text.toLowerCase()) > -1;
+    });
+    this.setState({
+      all: newData,
+    });
+  };
+  renderHeader = () => {
+    const {text} = this.state;
+    return (
+      <View style={styles.searchContainer}>
+        <TextInput
+          onChangeText={(text) => {
+            this.setState({
+              text,
+            });
+            this.searchFilter(text);
+          }}
+          value={text}
+          placeholder="Search..."
+          style={styles.searchInput}
+        />
+      </View>
+    );
+  };
+  renderFooter = () => {
+    if (!this.state.loading) {
+      return null;
+    }
+    return (
+      <View>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  };
   render() {
     const {navigate} = this.props.navigation;
     const {navigation} = this.props;
     const {name, surname, resim, loading} = this.state;
     return (
       <SafeAreaView style={styles.container}>
-        <View>
-        </View>
+        <View />
         <FlatList
           ListFooterComponent={this.renderFooter}
+          ListHeaderComponent={this.renderHeader()}
           numColumns={2}
           renderItem={this.renderContactsItem}
           data={this.state.all}
@@ -102,6 +143,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 5,
   },
   general: {
     flex: 1,
@@ -118,6 +160,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   searchContainer: {
+    marginVertical: 10,
     padding: 10,
     borderWidth: 1,
     borderColor: '#969696',
@@ -128,3 +171,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f9',
   },
 });
+// const renderContactsItem = ({item, index}) => {
+//   return (
+//       <TouchableOpacity
+//           style={[
+//             styles.itemContainer,
+//             {backgroundColor: index % 2 === 1 ? '#fafafa' : ''},
+//           ]}>
+//         <View style={styles.container}>
+//           <View style={styles.general}>
+//             <Image style={styles.avatar} source={{uri: item.resim}} />
+//             <View style={styles.textContainer}>
+//               <Text style={styles.name}>
+//                 {item.adi} {'\n'}
+//                 {item.fiyat} TL {'\n'}
+//                 {/*{item.userid.username} TL {'\n'}*/}
+//               </Text>
+//             </View>
+//           </View>
+//         </View>
+//       </TouchableOpacity>
+//   );
+// };
