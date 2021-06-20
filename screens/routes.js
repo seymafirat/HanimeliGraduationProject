@@ -42,6 +42,26 @@ import CameraAndGallery from './CameraAndGallery';
 import OnizlemeEkrani from './OnizlemeEkrani';
 //import SaticiProfil from './SaticiProfil';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import KullaniciBilgilerim from './KullaniciBilgilerim';
+import AdresBilgilerim from './AdresBilgilerim';
+import HolidayMood from './HolidayMood';
+import SifreDegisim from './SifreDegisim';
+import AyarlarScreen from './AyarlarScreen';
+
+//Ayarlar stack driwer menüye eklenecek
+const AyarlarStack = createStackNavigator(
+  {
+    Ayarlar: AyarlarScreen,
+    KullaniciBilgilerim: KullaniciBilgilerim,
+    AdresBilgilerim: AdresBilgilerim,
+    SifreDegisim: SifreDegisim,
+    HolidayMood: HolidayMood,
+  },
+  {
+    mode: 'modal',
+    //headerMode: 'none',
+  },
+);
 
 const BeforeSignin = createStackNavigator(
   {
@@ -130,6 +150,7 @@ const AppNavigator = createStackNavigator(
     UserInfo: UserInfo,
     AddressInfo: AddressInfo,
     Home: TabNavigator,
+    AyarlarScreen: AyarlarStack,
     ProfilScreen: ProfilScreen,
     AciklamaEkrani: AciklamaEkrani,
     KategoriSecme: KategoriSecme,
@@ -137,6 +158,7 @@ const AppNavigator = createStackNavigator(
     OnizlemeEkrani: OnizlemeEkrani,
     Foods: Foods,
     KategoriScreen: KategoriScreen,
+
     //SaticiProfil: SaticiProfil,
   },
   {
@@ -145,5 +167,5 @@ const AppNavigator = createStackNavigator(
   },
 );
 
-export default createAppContainer(AppNavigator);
+export default createAppContainer(TabNavigator);
 //pnar_bedir p23172317

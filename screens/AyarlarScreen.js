@@ -1,23 +1,31 @@
 import 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, {Component} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Button,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Linking} from 'react-native';
+import KullaniciBilgilerim from './KullaniciBilgilerim';
+import AdresBilgilerim from './AdresBilgilerim';
+import SifreDegisim from './SifreDegisim';
+import HolidayMood from './HolidayMood';
 
 export default class AyarlarScreen extends Component {
+  static navigationOptions = {
+    title: 'Ayarlar',
+    headerStyle: {
+      backgroundColor: '#FFF7A2',
+      // textAlign: 'center',
+      // alignItems: 'center',
+      // justifyContent: 'center',
+    },
+  };
   render() {
-    const {navigate} = this.props.navigation;
+    const {navigate, goBack} = this.props.navigation;
     return (
       <View style={styles.container}>
         <View style={styles.cerceve}>
           <View style={styles.buttonAyarlar}>
-            <TouchableOpacity style={styles.AyarlarMenu}>
+            <TouchableOpacity
+              onPress={() => navigate('KullaniciBilgilerim')}
+              style={styles.AyarlarMenu}>
               <View style={styles.iconAyarlar}>
                 <Icon name="user" size={30} color="#a5a5a5" />
               </View>
@@ -25,7 +33,9 @@ export default class AyarlarScreen extends Component {
                 <Text style={styles.ayarlarText}>Kullanıcı Bilgilerim </Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.AyarlarMenu}>
+            <TouchableOpacity
+              onPress={() => navigate('AdresBilgilerim')}
+              style={styles.AyarlarMenu}>
               <View style={styles.iconAyarlar}>
                 <Icon name="map-marker" size={30} color="#a5a5a5" />
               </View>
@@ -33,7 +43,9 @@ export default class AyarlarScreen extends Component {
                 <Text style={styles.ayarlarText}>Adres Bilgilerim</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.AyarlarMenu}>
+            <TouchableOpacity
+              onPress={() => navigate('SifreDegisim')}
+              style={styles.AyarlarMenu}>
               <View style={styles.iconAyarlar}>
                 <Icon name="unlock" size={30} color="#a5a5a5" />
               </View>
@@ -41,7 +53,9 @@ export default class AyarlarScreen extends Component {
                 <Text style={styles.ayarlarText}>Şifre Değişikliği</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.AyarlarMenu}>
+            <TouchableOpacity
+              onPress={() => navigate('HolidayMood')}
+              style={styles.AyarlarMenu}>
               <View style={styles.iconAyarlar}>
                 <Icon name="plane" size={30} color="#a5a5a5" />
               </View>
@@ -49,7 +63,9 @@ export default class AyarlarScreen extends Component {
                 <Text style={styles.ayarlarText}>Tatil Modu</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.AyarlarMenu}>
+            <TouchableOpacity
+              onPress={() => Linking.openURL('https://www.brkdgn.com')}
+              style={styles.AyarlarMenu}>
               <View style={styles.iconAyarlar}>
                 <Icon name="question" size={30} color="#a5a5a5" />
               </View>
@@ -57,7 +73,9 @@ export default class AyarlarScreen extends Component {
                 <Text style={styles.ayarlarText}>Yardım</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.AyarlarMenu}>
+            <TouchableOpacity
+              onPress={() => navigate('goBack()')}
+              style={styles.AyarlarMenu}>
               <View style={styles.iconAyarlar}>
                 <Icon name="sign-out" size={30} color="#a5a5a5" />
               </View>
