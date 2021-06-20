@@ -22,10 +22,10 @@ export default class HolidayMood extends Component {
             height: 60,
           }}
         />
-        <Image
-          style={{width: '100%', height: 180, marginTop: 2}}
-          source={require('../assets/tatil.jpg')}
-        />
+        {/*<Image*/}
+        {/*  style={{width: '100%', height: 180, marginTop: 2}}*/}
+        {/*  source={require('../assets/tatil.jpg')}*/}
+        {/*/>*/}
         <View style={styles.tatilModu}>
           <Text style={styles.modYazi}>Tatil Modu</Text>
           <Switch
