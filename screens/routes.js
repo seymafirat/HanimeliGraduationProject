@@ -35,6 +35,7 @@ import DietProducts from './DietProducts';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Favorites from './Favorites';
 import Card from './Card';
+import HanimeliSupport from './HanimeliSupport';
 
 const BeforeSignin = createStackNavigator(
   {
@@ -132,10 +133,11 @@ const AppNavigator = createStackNavigator(
     BabyProducts: BabyProducts,
     DesignProducts: TabNavigator,
     DietProducts: DietProducts,
+    HanimeliSupport: HanimeliSupport,
   },
   {
     headerMode: 'none',
-    initialRouteName: 'Home',
+    initialRouteName: 'HanimeliSupport',
   },
 );
 
