@@ -23,6 +23,7 @@ export default class DesignProducts extends Component {
     surname: '',
     resim: '',
     all: [],
+    dene: [],
     alldata: [],
     loading: true,
     detailname: '',
@@ -32,11 +33,11 @@ export default class DesignProducts extends Component {
   };
 
   componentDidMount() {
-    axios.get('http://213.159.30.21/service/bebek/list/').then((user) => {
-      console.log(user);
+    axios.get('http://213.159.30.21/service/bebek/list/').then((urun) => {
+      console.log(urun);
       this.setState({
-        all: user.data,
-        alldata: user.data,
+        all: urun.data,
+        alldata: urun.data,
       });
     });
   }
@@ -122,12 +123,13 @@ export default class DesignProducts extends Component {
           style={[styles.itemContainer, {backgroundColor: '#fafafa'}]}>
           <View style={styles.container}>
             <View style={styles.general}>
-              <Text style>{item.userid}</Text>
+              {/*<Text style>{item.userid.username}</Text>*/}
               <Image style={styles.avatar} source={{uri: item.resim}} />
               <View style={styles.textContainer}>
                 <Text style={styles.name}>
                   {item.adi} {'\n'}
                   {item.fiyat} {'TL'} {'\n'}
+                  {/*{this.state.dene}*/}
                 </Text>
                 <View style={{width: 8}} />
               </View>
@@ -237,6 +239,7 @@ export default class DesignProducts extends Component {
           renderItem={this.renderContactsItem}
           data={this.state.all}
         />
+        {/*<Text>{item.username}</Text>*/}
       </SafeAreaView>
     );
   }

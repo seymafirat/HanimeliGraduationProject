@@ -1,16 +1,12 @@
-// import AsyncStorage
 import AsyncStorage from '@react-native-community/async-storage';
-// import icons
 import Icon from 'react-native-vector-icons/Ionicons';
 import React, {Component} from 'react';
 import axios from 'axios';
 import {
   ActivityIndicator,
-  Button,
   FlatList,
   Image,
   SafeAreaView,
-  Fragment,
   StyleSheet,
   Text,
   TextInput,
@@ -122,7 +118,7 @@ export default class Foods extends Component {
           style={[styles.itemContainer, {backgroundColor: '#fafafa'}]}>
           <View style={styles.container}>
             <View style={styles.general}>
-              <Text style>{item.userid}</Text>
+              {/*<Text style>{item.userid.username}</Text>*/}
               <Image style={styles.avatar} source={{uri: item.resim}} />
               <View style={styles.textContainer}>
                 <Text style={styles.name}>

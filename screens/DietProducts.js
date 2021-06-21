@@ -122,7 +122,7 @@ export default class DietProducts extends Component {
           style={[styles.itemContainer, {backgroundColor: '#fafafa'}]}>
           <View style={styles.container}>
             <View style={styles.general}>
-              <Text style>{item.userid}</Text>
+              {/*<Text style>{item.userid.username}</Text>*/}
               <Image style={styles.avatar} source={{uri: item.resim}} />
               <View style={styles.textContainer}>
                 <Text style={styles.name}>

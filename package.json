@@ -25,6 +25,7 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-image-crop-picker": "^0.36.0",
     "react-native-image-picker": "^3.8.0",
+    "react-native-image-slider-box": "^1.0.12",
     "react-native-keyboard-aware-scroll-view": "^0.9.4",
     "react-native-paper": "^4.8.1",
     "react-native-push-notification": "^7.3.1",
@@ -38,6 +39,7 @@
     "react-native-vector-icons": "^7.1.0",
     "react-native-video": "^5.1.1",
     "react-navigation": "^4.4.4",
+    "react-navigation-drawer": "^2.7.1",
     "react-navigation-stack": "^2.10.4",
     "react-navigation-tabs": "^2.11.1",
     "read-more-text": "^1.0.3"

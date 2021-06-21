@@ -8,36 +8,33 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import axios from 'axios';
-
 export default class UserInfo extends Component {
   state = {
+    username: '',
     name: '',
     surname: '',
   };
-  componentDidMount = async () => {
-    const {
-      data: {results},
-    } = await axios.get('https://randomuser.me/api/');
-    const {
-      name: {first, last},
-    } = results[0];
-
-    this.setState({
-      name: first,
-      surname: last,
-    });
-  };
-
+  componentDidMount() {
+    axios
+      .get('http://213.159.30.21/auth/users/3/')
+      .then((User) => User.data)
+      .then((User) => {
+        console.log(User);
+        this.setState({
+          username: User.username,
+          name: User.first_name,
+          surname: User.last_name,
+          email: User.email,
+        });
+      });
+  }
   render() {
-    const {name, surname} = this.state;
+    const {username, name, surname, email} = this.state;
     return (
       <SafeAreaView style={styles.container}>
         <TouchableOpacity style={styles.kutu}>
           <Text style={styles.text1}>Kullanıcı Adı: </Text>
-          <Text style={styles.text2}>
-            {name}
-            {surname}
-          </Text>
+          <Text style={styles.text2}> {username} </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.kutu}>
           <Text style={styles.text1}>İsim Soyisim: </Text>
@@ -47,23 +44,12 @@ export default class UserInfo extends Component {
         </TouchableOpacity>
         <TouchableOpacity style={styles.kutu}>
           <Text style={styles.text1}>E-Mail:</Text>
-          <Text style={styles.text2}>
-            {name} {surname}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.kutu}>
-          <Text style={styles.text1}>Cinsiyet:</Text>
-          <Text style={styles.text2}>{name}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.kutu}>
-          <Text style={styles.text1}>Telefon:</Text>
-          <Text style={styles.text2}>{surname}</Text>
+          <Text style={styles.text2}>{email}</Text>
         </TouchableOpacity>
       </SafeAreaView>
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

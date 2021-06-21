@@ -6,6 +6,7 @@ import {
   TextInput,
   ScrollView,
   Keyboard,
+  Alert,
 } from 'react-native';
 import {styles} from './styles';
 import {Header} from 'react-native-elements';
@@ -31,37 +32,12 @@ export default class FunStoryAdd extends Component {
     }
     Keyboard.dismiss();
   };
-
   InsertData = () => {
-    const baseURL = 'http://213.159.30.21/service/api/Urun/';
-    fetch(baseURL, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        userid: 'seyma',
-        //username: userid.username,
-        kategoriId: 6,
-        altkategoriId: 2,
-        adi: this.state.textBaslik,
-        aciklama: this.state.aciklama,
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data);
-        this.props.navigation.navigate('TalkScreen', {
-          apiRequestUrl: JSON.parse(data.id),
-          adi: this.state.textBaslik,
-          aciklama: this.state.aciklama,
-          kategori: 6,
-        });
-      })
-      .catch((error) => console.log(error));
+    Alert.alert(
+      'Teşekkürler!',
+      'Talebini aldık en kısa sürede haftanın enlerinde görüşmek üzere😍',
+    );
   };
-
   render() {
     return (
       <View style={styles.aciklamaContainer}>

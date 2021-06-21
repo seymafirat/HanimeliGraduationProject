@@ -2,9 +2,9 @@ import 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Linking} from 'react-native';
-import KullaniciBilgilerim from './KullaniciBilgilerim';
-import AdresBilgilerim from './AdresBilgilerim';
-import SifreDegisim from './SifreDegisim';
+import KullaniciBilgilerim from './UserInfo';
+import AdresBilgilerim from './AddressInfo';
+import SifreDegisim from './PasswordInfo';
 import HolidayMood from './HolidayMood';
 
 export default class AyarlarScreen extends Component {

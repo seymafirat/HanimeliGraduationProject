@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 var {width} = Dimensions.get('window');
 
@@ -22,6 +23,7 @@ export default class Card extends Component {
     this.state = {
       dataCart: [],
       deneme: '',
+      // refreshing: false,
     };
   }
   componentDidMount() {
@@ -37,7 +39,6 @@ export default class Card extends Component {
         alert(err);
       });
   }
-
   render() {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -49,6 +50,15 @@ export default class Card extends Component {
 
         <View style={{flex: 1}}>
           <ScrollView>
+            {/*// refreshControl={*/}
+            {/*//   <RefreshControl>*/}
+            {/*//     refreshing = {this.state.refreshing}*/}
+            {/*//     onRefresh ={this._onRefresh.bind(this)}*/}
+            {/*//   </RefreshControl>*/}
+            {/*// }*/}
+            <View>
+              <ActivityIndicator size="large" />
+            </View>
             {this.state.dataCart.map((item, i) => {
               return (
                 <View
@@ -123,9 +133,11 @@ export default class Card extends Component {
                 </View>
               );
             })}
-
             <View style={{height: 20}} />
-
+            <Text style={{fontSize: 28, color: '#33c37d', textAlign: 'center'}}>
+              Total: {this.onLoadTotal()} ₺
+            </Text>
+            <View style={{height: 10}} />
             <TouchableOpacity
               onPress={() => alert('Your payment is complete')}
               style={{
@@ -169,5 +181,13 @@ export default class Card extends Component {
       console.log(dataCar[0]);
       console.log(cantd);
     }
+  }
+  onLoadTotal() {
+    var total = 0;
+    const cart = this.state.dataCart;
+    for (var i = 0; i < cart.length; i++) {
+      total = total + cart[i].fiy * cart[i].quantity;
+    }
+    return total;
   }
 }

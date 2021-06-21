@@ -9,12 +9,20 @@ import {
   TextInput,
   ActivityIndicator,
   Button,
+  Dimensions,
+  RefreshControl,
 } from 'react-native';
+var {width} = Dimensions.get('window');
 import axios from 'axios';
 // import Animated from "react-native-reanimated";
 // import log from "module:react-native-reanimated.Animated.log";
 export default class Flat extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      refreshing: false,
+    };
+  }
 
   /* componentDidMount() {
     axios.get('http://213.159.30.21/service/api/Urun/').then((user) => {
@@ -67,6 +75,9 @@ export default class Flat extends Component {
       })
       .catch((error) => console.log(error));
   };
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+  };
   renderContactsItem = ({item, index}) => {
     const {navigate} = this.props.navigation;
     const {navigation} = this.props;
@@ -95,20 +106,34 @@ export default class Flat extends Component {
         <View style={styles.avatarandtext}>
           <Image style={styles.avatar} source={{uri: detailimage}} />
           <View style={styles.textContainer}>
-            <Text style={styles.name}>{detailname}</Text>
-            <Text style={styles.name}>{detailcost} TL</Text>
+            <Text style={styles.name2}>{detailname}</Text>
             <Text style={styles.name}>{detailaciklama} </Text>
+            <Text style={styles.name3}>{detailcost} TL</Text>
             <View style={styles.sepeteklebuton}>
-              <Button
-                onPress={() => this.InsertData()}
-                /*navigate('Profile', {
-                    detailname2: detailname,
-                    detailcost2: detailcost,
-                    detailimage2: detailimage,
-                    all2: detailcost,*/
-                title="sepete ekle"
-                color="#841584"
-              />
+              <View style={{width: 100, height: 100, marginHorizontal: 10}}>
+                <Button
+                  onPress={() => this.refreshPage}
+                  /*navigate('Profile', {
+                        detailname2: detailname,
+                        detailcost2: detailcost,
+                        detailimage2: detailimage,
+                        all2: detailcost,*/
+                  title="sepete ekle"
+                  color="#841584"
+                />
+              </View>
+              <View style={{width: 100, height: 100, marginHorizontal: 10}}>
+                <Button
+                  onPress={() => this.InsertData()}
+                  /*navigate('Profile', {
+                      detailname2: detailname,
+                      detailcost2: detailcost,
+                      detailimage2: detailimage,
+                      all2: detailcost,*/
+                  title="Favorilere ekle"
+                  color="#841584"
+                />
+              </View>
             </View>
           </View>
         </View>
@@ -118,6 +143,12 @@ export default class Flat extends Component {
           numColumns={2}
           keyExtractor={(item) => item.login.uuid}
           data={this.state.contacts}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          }
         />
       </View>
     );
@@ -128,6 +159,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     paddingVertical: 5,
+    marginTop: 20,
     // borderBottomWidth: 1,
     // borderBottomColor: '#eee',
   },
@@ -139,8 +171,8 @@ const styles = StyleSheet.create({
   },
   sepeteklebuton: {
     marginHorizontal: 120,
-    width: 200,
-    height: 150,
+    flexDirection: 'row',
+    marginTop: 15,
   },
   sepetekleyazi: {
     fontSize: 22,
@@ -149,6 +181,7 @@ const styles = StyleSheet.create({
   },
   avatarandtext: {
     flexDirection: 'column',
+    marginTop: 25,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -163,8 +196,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 370,
     height: 250,
-    marginHorizontal: 5,
+    marginHorizontal: 25,
     flexDirection: 'column',
+    borderColor: '#333333',
+    borderWidth: 4,
   },
   textContainer: {
     justifyContent: 'center',
@@ -174,6 +209,24 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 20,
     marginHorizontal: 3,
+    marginTop: 10,
+    borderBottomWidth: 2,
+    borderColor: '#cccccc',
+    paddingBottom: 10,
+  },
+  name2: {
+    fontSize: 20,
+    marginHorizontal: 3,
+    fontWeight: 'bold',
+    borderBottomWidth: 2,
+    borderColor: '#cccccc',
+    paddingBottom: 10,
+  },
+  name3: {
+    fontSize: 20,
+    marginHorizontal: 3,
+    marginTop: 10,
+    fontWeight: 'bold',
   },
   countrytext: {
     fontSize: 15,

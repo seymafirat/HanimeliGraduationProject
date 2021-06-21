@@ -50,13 +50,13 @@ export default class ProfilScreen extends Component {
   }
   componentDidMount() {
     axios.get('http://213.159.30.21/auth/users/4/').then((user) => {
-      console.log(user.data);
+      //console.log(user.data);
       this.setState({
         name: user.data,
       });
     });
-    axios.get('http://213.159.30.21/service/diyet/list/').then((user) => {
-      console.log(user);
+    axios.get('http://213.159.30.21/service/api/Urun/').then((user) => {
+      //console.log(user);
       this.setState({
         all: user.data,
         alldata: user.data,
@@ -126,7 +126,7 @@ export default class ProfilScreen extends Component {
   renderContactsItem = ({item, index}) => {
     const {navigate} = this.props.navigation;
     const {name, surname, resim, loading} = this.state;
-    if (item.userid == 'pnarbedir_') {
+    if (item.userid.username == 'pnarbedir_') {
       return (
         <View>
           <TouchableOpacity
@@ -305,48 +305,25 @@ export default class ProfilScreen extends Component {
             </TouchableOpacity>
             <View style={styles.ustbanner2}>
               <Text style={styles.kullaniciAdi}>{name.username}</Text>
-              <Image style={styles.imageYildiz} />
+              <Text style={styles.kullaniciAdi}>
+                {name.first_name} {name.last_name}
+              </Text>
             </View>
-            <Text style={styles.degerlendirme}>Kullanıcı Yorumları</Text>
-            <Text style={styles.hakkinda}> Hakkımda</Text>
+            <TouchableOpacity style={styles.degerlendirme}>
+              <Text style={{color: 'red'}}>Nasıl Ürün Yüklerim? </Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <ScrollableTabView
-          initialPage={0}
-          renderTabBar={() => <ScrollableTabBar />}>
-          <View tabLabel="Ev Yemekleri">
-            <FlatList
-              ListFooterComponent={this.renderFooter}
-              //ListHeaderComponent={this.renderHeader()}
-              numColumns={2}
-              renderItem={this.renderContactsItem}
-              data={this.state.all}
-            />
-          </View>
-          <View tabLabel="Dekorasyon">
-            <View style={{width: 100, height: 100}}>
-              <Image
-                source={avatarSource}
-                style={{
-                  width: 120,
-                  height: 120,
-                  //marginTop: 2,
-                }}
-              />
-            </View>
-          </View>
-          <View tabLabel="Benim Hikayem">
-            <View style={{width: 100, height: 100}}>
-              <Image
-                source={avatarSource}
-                style={{
-                  width: 120,
-                  height: 120,
-                }}
-              />
-            </View>
-          </View>
-        </ScrollableTabView>
+        <SafeAreaView style={styles.flat}>
+          <View />
+          <FlatList
+            ListFooterComponent={this.renderFooter}
+            //ListHeaderComponent={this.renderHeader()}
+            numColumns={2}
+            renderItem={this.renderContactsItem}
+            data={this.state.all}
+          />
+        </SafeAreaView>
       </View>
     );
   }
@@ -357,7 +334,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
-    paddingTop: 20,
+    paddingBottom: 20,
   },
   urunler: {
     flex: 1,
@@ -368,6 +345,11 @@ const styles = StyleSheet.create({
   avatar: {
     width: 185,
     height: 170,
+  },
+  flat: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imageBack: {
     width: 100,
@@ -394,9 +376,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   degerlendirme: {
-    marginTop: 45,
+    marginLeft: -8,
+    marginTop: 125,
     fontSize: 15,
-    marginRight: -40,
+    color: 'red',
   },
   buttonGenel: {
     flexDirection: 'row',

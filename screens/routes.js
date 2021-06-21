@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
+import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Flat from './Flat';
 import Profile from './Profile';
@@ -36,6 +37,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Favorites from './Favorites';
 import Card from './Card';
 import HanimeliSupport from './HanimeliSupport';
+import TheBest from './TheBest';
+import AyarlarScreen from './AyarlarScreen';
+import HolidayMood from './HolidayMood';
 
 const BeforeSignin = createStackNavigator(
   {
@@ -57,6 +61,19 @@ const AfterSignin = createStackNavigator(
   {
     headerMode: 'none',
     initialRouteName: 'Dashboard',
+  },
+);
+const AyarlarStack = createStackNavigator(
+  {
+    Ayarlar: AyarlarScreen,
+    KullaniciBilgilerim: UserInfo,
+    AdresBilgilerim: AddressInfo,
+    SifreDegisim: PasswordInfo,
+    HolidayMood: HolidayMood,
+  },
+  {
+    mode: 'modal',
+    //headerMode: 'none',
   },
 );
 const TabNavigator = createBottomTabNavigator({
@@ -134,13 +151,45 @@ const AppNavigator = createStackNavigator(
     DesignProducts: TabNavigator,
     DietProducts: DietProducts,
     HanimeliSupport: HanimeliSupport,
+    TheBest: TheBest,
+    TumAyarlar: AyarlarStack,
   },
   {
     headerMode: 'none',
-    initialRouteName: 'HanimeliSupport',
+    initialRouteName: 'Home',
   },
 );
-
-export default createAppContainer(AppNavigator);
+const Drawer = createDrawerNavigator(
+  {
+    Profil: AppNavigator,
+    KampanyalarDuyurular: {
+      screen: CampaignAnnounc,
+      navigationOptions: {
+        drawerLabel: 'Kampanya-Duyuru',
+        drawerLockMode: 'locked-closed',
+      },
+    },
+    TatilModu: {
+      screen: Campaign,
+      navigationOptions: {
+        drawerLabel: 'Tatil Modu',
+      },
+    },
+    Ayarlar: AyarlarScreen,
+    Çıkış: AppNavigator,
+    Destek: HanimeliSupport,
+  },
+  {
+    drawerPosition: 'right',
+    drawerWidth: 160,
+    contentOptions: {
+      activeTintColor: '#fff',
+      inactiveTintColor: '#191919',
+      activeBackgroundColor: '#191919',
+      inactiveBackgroundColor: '#fff',
+    },
+  },
+);
+export default createAppContainer(Drawer);
 //pnar_bedir p23172317
 //    3.8.4
