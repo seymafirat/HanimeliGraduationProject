@@ -24,7 +24,6 @@ const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 import axios from 'axios';
 import ImagePicker from 'react-native-image-crop-picker';
-import CameraAddition from './CameraAdditions';
 export default class CameraAndGallery extends Component {
   mediaType: any;
   constructor() {

@@ -122,7 +122,7 @@ const AppNavigator = createStackNavigator(
     UserInfo: UserInfo,
     AddressInfo: AddressInfo,
     Home: TabNavigator,
-    ProfilScreen: ProfilScreen,
+    ProfilScreen: TabNavigator,
     AciklamaEkrani: AciklamaEkrani,
     KategoriSecme: KategoriSecme,
     CameraAndGallery: CameraAndGallery,
