@@ -21,6 +21,7 @@ export default class Card extends Component {
     super(props);
     this.state = {
       dataCart: [],
+      deneme: '',
     };
   }
   componentDidMount() {
@@ -165,6 +166,8 @@ export default class Card extends Component {
     } else if (type == false && cantd == 1) {
       dataCar.splice(i, 1);
       this.setState({dataCart: dataCar});
+      console.log(dataCar[0]);
+      console.log(cantd);
     }
   }
 }

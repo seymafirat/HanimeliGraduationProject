@@ -18,7 +18,6 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TextInput placeholder="Search..." style={styles.searchInput} />
         <ScrollableTabView
           style={{marginTop: 8}}
           initialPage={0}
@@ -46,14 +45,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
     paddingTop: 20,
-  },
-  searchInput: {
-    fontSize: 16,
-    backgroundColor: '#fff',
-    padding: 10,
-    borderColor: '#d5d5d5',
-    borderWidth: 1,
-    borderRadius: 15,
-    margin: 5,
   },
 });
