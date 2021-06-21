@@ -12,9 +12,8 @@ import {
   SafeAreaView,
 } from 'react-native';
 import axios from 'axios';
-// import Animated from "react-native-reanimated";
-// import log from "module:react-native-reanimated.Animated.log";
-export default class deneme extends Component {
+import Video from 'react-native-video';
+export default class TalkScreen extends Component {
   state = {
     name: '',
     surname: '',
@@ -22,13 +21,11 @@ export default class deneme extends Component {
     all: [],
     loading: true,
     detailname: '',
-    detailcost: '',
-    detailimage: '',
     detailaciklama: '',
   };
 
   componentDidMount() {
-    axios.get('http://213.159.30.21/service/api/Urun/').then((user) => {
+    axios.get('http://213.159.30.21/service/diger/list/').then((user) => {
       console.log(user);
       this.setState({
         all: user.data,
@@ -40,41 +37,25 @@ export default class deneme extends Component {
     const {navigate} = this.props.navigation;
     const {name, surname, resim, loading} = this.state;
     return (
-      <TouchableOpacity
-        onPress={() => {
-          navigate('Detail', {
-            detailname: item.adi,
-            detailcost: item.fiyat,
-            detailimage: item.resim,
-            detailaciklama: item.aciklama,
-          });
-          // this.setState({
-          //   name:
-          //     this.state.name +
-          //     item.name.first +
-          //     item.name.last +
-          //     item.location.state,
-          //   //item.picture.thumbnail,
-          // });
-          //console.log(item);
-        }}
-        style={[
-          styles.itemContainer,
-          {backgroundColor: index % 2 === 1 ? '#fafafa' : ''},
-        ]}>
-        <View style={styles.container}>
-          <View style={styles.general}>
-            <Image style={styles.avatar} source={{uri: item.resim}} />
-            <View style={styles.textContainer}>
-              <Text style={styles.name}>
-                {item.adi} {'\n'}
-                {item.fiyat} TL {'\n'}
-                {/*{item.userid.username} TL {'\n'}*/}
-              </Text>
+      <View>
+        <TouchableOpacity
+          style={[
+            styles.itemContainer,
+            {backgroundColor: index % 2 === 1 ? '#fafafa' : ''},
+          ]}>
+          <View style={styles.container}>
+            <View style={styles.general}>
+              <View style={styles.textContainer}>
+                <Text style={styles.name}>
+                  {item.adi} {'\n'}
+                  {item.aciklama} {'\n'}
+                  {/*{item.userid.username} TL {'\n'}*/}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     );
   };
 
@@ -84,8 +65,7 @@ export default class deneme extends Component {
     const {name, surname, resim, loading} = this.state;
     return (
       <SafeAreaView style={styles.container}>
-        <View>
-        </View>
+        <View />
         <FlatList
           ListFooterComponent={this.renderFooter}
           numColumns={2}

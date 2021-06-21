@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {
   Container,
-  Header,
   Content,
   List,
   ListItem,
@@ -11,8 +10,10 @@ import {
   Thumbnail,
   Text,
 } from 'native-base';
+import {Header} from 'react-native-elements';
 import {Icon} from 'react-native-elements';
 import {Alert, StyleSheet} from 'react-native';
+import AciklamaEkrani from './AciklamaEkrani';
 export default class ListAvatarExample extends Component {
   constructor() {
     super();
@@ -20,14 +21,11 @@ export default class ListAvatarExample extends Component {
       categoryInput: ' ',
     };
   }
-  InsertData = () => {
+  InsertData = (kategoriId) => {
     const {getParam} = this.props.navigation;
     const adi = getParam('adi');
     const aciklama = getParam('aciklama');
     const fiyat = getParam('fiyat');
-    //const apiRequestUrl = getParam('apiRequestUrl');
-    console.log('eslem');
-    //console.log(apiRequestUrl);
     const baseURL = 'http://213.159.30.21/service/api/Urun/';
     fetch(baseURL, {
       method: 'POST',
@@ -36,10 +34,10 @@ export default class ListAvatarExample extends Component {
         'Content-type': 'application/json',
       },
       body: JSON.stringify({
-        userid: 4,
+        userid: 'pnarbedir_',
         //username: userid.username,
-        stok: 5,
-        kategoriId: 2,
+        stok: 1,
+        kategoriId,
         altkategoriId: 2,
         adi,
         aciklama,
@@ -55,7 +53,6 @@ export default class ListAvatarExample extends Component {
           apiRequestUrl,
           JSON.stringify(data, null, 4),
         );
-        //Alert.alert('Hİ BABA ID ', `BENIM SON ID BUDUR : ${data.id}`);
         console.log(JSON.parse(data.id));
         this.props.navigation.navigate('CameraAndGallery', {
           apiRequestUrl: JSON.parse(data.id),
@@ -65,15 +62,36 @@ export default class ListAvatarExample extends Component {
           kategori: 'Yemek',
         });
         console.log('seyma' + JSON.parse(data.id));
-        //this.props.navigation.navigate('OnizlemeEkrani', data.aciklama);
-        //Alert.alert('adi:' + data.adi + 'aciklama:' + data.aciklama);
       })
       .catch((error) => console.log(error));
   };
+
+  navigateToPreviewScreen = () => {
+    this.props.navigation.navigate('AciklamaEkrani');
+  };
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <Container>
-        <Content>
+        <Content style={{marginTop: 10}}>
+          <Header
+            style={{height: 120, marginTop: 50}}
+            placement={'left'}
+            leftComponent={{
+              icon: 'arrow-back',
+              color: 'black',
+              onPress: () => navigate('AciklamaEkrani'),
+            }}
+            centerComponent={{
+              text: 'Kategoriler',
+              style: {fontSize: 20, marginTop: -2},
+            }}
+            containerStyle={{
+              backgroundColor: 'white',
+              alignItems: 'space-around',
+              marginTop: -10,
+            }}
+          />
           <List>
             <ListItem avatar>
               <Left>
@@ -88,7 +106,7 @@ export default class ListAvatarExample extends Component {
               <Right>
                 <Icon
                   name={'arrow-forward'}
-                  onPress={() => this.InsertData()}
+                  onPress={() => this.InsertData(2)}
                 />
               </Right>
             </ListItem>
@@ -102,11 +120,14 @@ export default class ListAvatarExample extends Component {
                 <Text>Tasarım Ürünleri</Text>
                 <Text note>
                   Makrome Ürünler, Hasır Çantalar, Tasarım Kolyeler, Tasarım
-                  Küpeler, Tasarım Bileklikler...
+                  Küpeler, Tasarım Bileklikler, Örgüler...
                 </Text>
               </Body>
               <Right>
-                <Icon name={'arrow-forward'} />
+                <Icon
+                  name={'arrow-forward'}
+                  onPress={() => this.InsertData(3)}
+                />
               </Right>
             </ListItem>
             <List>
@@ -122,7 +143,10 @@ export default class ListAvatarExample extends Component {
                   </Text>
                 </Body>
                 <Right>
-                  <Icon name={'arrow-forward'} />
+                  <Icon
+                    name={'arrow-forward'}
+                    onPress={() => this.InsertData(4)}
+                  />
                 </Right>
               </ListItem>
               <ListItem avatar>
@@ -138,7 +162,10 @@ export default class ListAvatarExample extends Component {
                   </Text>
                 </Body>
                 <Right>
-                  <Icon name={'arrow-forward'} onPress={() => this.deneme()} />
+                  <Icon
+                    name={'arrow-forward'}
+                    onPress={() => this.InsertData(5)}
+                  />
                 </Right>
               </ListItem>
               <ListItem avatar>
@@ -150,7 +177,10 @@ export default class ListAvatarExample extends Component {
                   <Text note>Kategorilerde bulunmayan diğer ürünler....</Text>
                 </Body>
                 <Right>
-                  <Icon name={'arrow-forward'} onPress={() => this.deneme()} />
+                  <Icon
+                    name={'arrow-forward'}
+                    onPress={() => this.InsertData(6)}
+                  />
                 </Right>
               </ListItem>
             </List>

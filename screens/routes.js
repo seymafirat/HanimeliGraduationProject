@@ -1,4 +1,16 @@
 import React, {Component} from 'react';
+// import {
+//   StyleSheet,
+//   View,
+//   Text,
+//   SafeAreaView,
+//   FlatList,
+//   Image,
+//   TouchableOpacity,
+//   TextInput,
+//   ScrollView,
+//   KeyboardAvoidingView,
+// } from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
@@ -28,13 +40,8 @@ import AciklamaEkrani from './AciklamaEkrani';
 import KategoriSecme from './KategoriSecme';
 import CameraAndGallery from './CameraAndGallery';
 import OnizlemeEkrani from './OnizlemeEkrani';
-import BabyProducts from './BabyProducts';
-import DesignProducts from './DesignProducts';
-import DietProducts from './DietProducts';
 //import SaticiProfil from './SaticiProfil';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Favorites from './Favorites';
-import Card from './Card';
 
 const BeforeSignin = createStackNavigator(
   {
@@ -47,6 +54,7 @@ const BeforeSignin = createStackNavigator(
     initialRouteName: 'Login',
   },
 );
+
 const AfterSignin = createStackNavigator(
   {
     Dashboard: {
@@ -76,7 +84,7 @@ const TabNavigator = createBottomTabNavigator({
     },
   },
   Favoriler: {
-    screen: Favorites,
+    screen: deneme,
     navigationOptions: {
       tabBarIcon: ({tintColor}) => (
         <Icon name="heart" size={22} color={tintColor} />
@@ -84,7 +92,7 @@ const TabNavigator = createBottomTabNavigator({
     },
   },
   Siparişler: {
-    screen: Card,
+    screen: CampaignAnnounc,
     navigationOptions: {
       tabBarIcon: ({tintColor}) => (
         <Icon name="shopping-basket" size={22} color={tintColor} />
@@ -92,7 +100,7 @@ const TabNavigator = createBottomTabNavigator({
     },
   },
   Profil: {
-    screen: ProfilScreen,
+    screen: CampaignAnnounc,
     navigationOptions: {
       backgroundColor: '#FFF7A2',
       tabBarIcon: ({tintColor}) => (
@@ -129,16 +137,13 @@ const AppNavigator = createStackNavigator(
     OnizlemeEkrani: OnizlemeEkrani,
     Foods: Foods,
     KategoriScreen: KategoriScreen,
-    BabyProducts: BabyProducts,
-    DesignProducts: DesignProducts,
-    DietProducts: DietProducts,
+    //SaticiProfil: SaticiProfil,
   },
   {
     headerMode: 'none',
-    initialRouteName: 'Home',
+    initialRouteName: 'deneme',
   },
 );
 
 export default createAppContainer(AppNavigator);
 //pnar_bedir p23172317
-//    3.8.4

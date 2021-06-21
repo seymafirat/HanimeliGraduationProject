@@ -11,6 +11,7 @@ import {
   Image,
   TextInput,
   Button,
+  Keyboard,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
@@ -45,12 +46,34 @@ export default class Register extends Component {
       .then((resp) => resp.json())
       .then((data) => {
         console.log(data);
-        alert('ok');
+        //alert('ok');
         console.log('ok');
-        //this.props.navigation.navigate('OnizlemeEkrani');
-        //Alert.alert('adi:' + data.adi + 'aciklama:' + data.aciklama);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log('ya amk');
+        console.log(error);
+      });
+  };
+  checkInput = () => {
+    var username = this.state.usernameInput;
+    var password = this.state.passwordInput;
+    var eposta = this.state.epostaInput;
+    var name = this.state.nameInput;
+    var surname = this.state.surnameInput;
+    if (!username.trim()) {
+      this.setState({msg: 'Kullanıcı adı boş olamaz!'});
+    } else if (!password.trim()) {
+      this.setState({msg: 'Parola boş olamaz!'});
+    } else if (!eposta.trim()) {
+      this.setState({msg: 'E-posta boş olamaz!'});
+    } else if (!name.trim()) {
+      this.setState({msg: 'İsim boş olamaz!'});
+    } else if (!surname.trim()) {
+      this.setState({msg: 'Soyisim boş olamaz!'});
+    } else {
+      //this.InsertData();
+    }
+    Keyboard.dismiss();
   };
   render() {
     return (
@@ -70,10 +93,6 @@ export default class Register extends Component {
             </View>
           </View>
           <ScrollView>
-            {/*<Image*/}
-            {/*  style={styles.imageKampanya}*/}
-            {/*  source={require('../assets/logo.png')}*/}
-            {/*/>*/}
             <View style={styles.RegisterArea}>
               <View>
                 <TextInput

@@ -4,10 +4,15 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
   ScrollView,
   PermissionsAndroid,
   Platform,
+  ImageBackground,
+  ActivityIndicator,
+  Image,
+  FlatList,
+  TextInput,
+  SafeAreaView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ScrollableTabView, {
@@ -18,20 +23,179 @@ import {Header} from 'react-native-elements';
 import {Avatar} from 'react-native-elements';
 import axios from 'axios';
 import {launchImageLibrary} from 'react-native-image-picker';
-//import Home from './Home';
+import AsyncStorage from '@react-native-community/async-storage';
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
+const token = AsyncStorage.getItem('token');
+console.log(token);
 export default class ProfilScreen extends Component {
   constructor() {
     super();
     this.state = {
-      profilResmi: null,
       avatarSource: null,
+      name: '',
+      profilResmi: '',
+      resim: '',
+      username: '',
+      all: [],
+      surname: '',
+      alldata: [],
+      loading: true,
+      detailname: '',
+      detailcost: '',
+      detailimage: '',
+      detailaciklama: '',
+      profil: '',
     };
+  }
+  componentDidMount() {
+    axios.get('http://213.159.30.21/auth/users/4/').then((user) => {
+      console.log(user.data);
+      this.setState({
+        name: user.data,
+      });
+    });
+    axios.get('http://213.159.30.21/service/diyet/list/').then((user) => {
+      console.log(user);
+      this.setState({
+        all: user.data,
+        alldata: user.data,
+      });
+    });
+  }
+  onClickAddFav(data) {
+    const itemfav = {
+      all2: data,
+      quantity: 1,
+      name: data.adi,
+      surname: data.aciklama,
+      res: data.resim,
+      fiy: data.fiyat,
+    };
+
+    AsyncStorage.getItem('fav')
+      .then((datafav) => {
+        if (datafav !== null) {
+          // We have data!!
+          const fav = JSON.parse(datafav);
+          fav.push(itemfav);
+          AsyncStorage.setItem('fav', JSON.stringify(fav));
+        } else {
+          const fav = [];
+          fav.push(itemfav);
+          AsyncStorage.setItem('fav', JSON.stringify(fav));
+        }
+        alert('Add Fav');
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
+  onClickAddCart(data) {
+    const itemcart = {
+      all2: data,
+      quantity: 1,
+      name: data.adi,
+      surname: data.aciklama,
+      res: data.resim,
+      fiy: data.fiyat,
+    };
+
+    AsyncStorage.getItem('cart')
+      .then((datacart) => {
+        if (datacart !== null) {
+          // We have data!!
+          const cart = JSON.parse(datacart);
+          cart.push(itemcart);
+          AsyncStorage.setItem('cart', JSON.stringify(cart));
+        } else {
+          const cart = [];
+          cart.push(itemcart);
+          AsyncStorage.setItem('cart', JSON.stringify(cart));
+        }
+        alert('Add Cart');
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }
 
   extractRequiredImageData = () => {
     let avatarSource = this.props.navigation.state.params;
+  };
+  renderContactsItem = ({item, index}) => {
+    const {navigate} = this.props.navigation;
+    const {name, surname, resim, loading} = this.state;
+    if (item.userid == 'pnarbedir_') {
+      return (
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              navigate('Detail', {
+                detailname: item.adi,
+                detailcost: item.fiyat,
+                detailimage: item.resim,
+                detailaciklama: item.aciklama,
+              });
+            }}
+            style={[styles.itemContainer, {backgroundColor: '#fafafa'}]}>
+            <View style={styles.container}>
+              <View style={styles.general}>
+                <Image style={styles.avatar} source={{uri: item.resim}} />
+                <View style={styles.textContainer}>
+                  <View style={{width: 8}} />
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'white',
+              marginTop: -15,
+            }}>
+            <TouchableOpacity
+              style={{
+                width: 70,
+                height: 50,
+                // backgroundColor: '#efefef',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 5,
+              }}
+              onPress={() => this.onClickAddCart(item)}>
+              <Icon name="cart" size={30} color={'black'} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                width: 70,
+                height: 50,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 4,
+                borderRadius: 5,
+              }}
+              onPress={() => this.onClickAddFav(item)}>
+              <Icon name="heart" size={30} color={'black'} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    }
+  };
+  renderFooter = () => {
+    if (!this.state.loading) {
+      return null;
+    }
+    return (
+      <View>
+        <ActivityIndicator size="large" />
+      </View>
+    );
   };
 
   uploadPhoto = async (response) => {
@@ -58,18 +222,18 @@ export default class ProfilScreen extends Component {
         console.log(source);
         this.setState({
           profilResmi: source,
-          //loading: false,
         });
-        //console.log(response);
       })
       .catch((error) => {
         console.log(error);
       });
   };
   render() {
+    const {name, surname, resim, loading} = this.state;
     //const avatarSource = this.props.navigation.state.params;
     const {getParam} = this.props.navigation;
     const avatarSource = getParam('avatarSource');
+    const username = getParam('username');
     const requestGalleryPermission = async () => {
       try {
         const granted = await PermissionsAndroid.request(
@@ -84,7 +248,6 @@ export default class ProfilScreen extends Component {
           },
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('calisiyo');
           const options = {
             title: 'Select Photo',
             cancelButtonTitle: 'cancel',
@@ -100,19 +263,9 @@ export default class ProfilScreen extends Component {
               allowsEditing: true, //olmuyo cunku androidde yok
             },
           };
-          //console.log('İzin verildi');
           launchImageLibrary(options, (response) => {
             console.log('Response = ', response);
-            //const source = {uri: response.uri};
-            /*this.setState({
-              avatarSource: source,
-            });*/
-            //upload başarılı değilse görünmesin diye yorum satırı yaptım
-            //this.cropLast(source);
-            //this.cropLast();
             this.uploadPhoto(response);
-            //console.log('nolcak');
-            //}
           });
         } else {
           console.log('İzin verilmedi');
@@ -124,22 +277,17 @@ export default class ProfilScreen extends Component {
     return (
       <View style={styles.container}>
         <Header
+          style={{marginTop: -40}}
           placement={'left'}
           leftComponent={{
             icon: 'arrow-back',
             color: 'black',
+            onPress: () => this.props.navigation.navigate('Home'),
           }}
           centerComponent={{
             text: 'Profilim',
-            style: {fontSize: 20, marginTop: -2},
+            style: {fontSize: 20, marginTop: -2, fontWeight: 'bold'},
           }}
-          rightComponent={
-            {
-              //text: 'Devam',
-              //color: 'black',
-              //style: {fontSize: 16},
-            }
-          }
           containerStyle={{
             backgroundColor: 'white',
             alignItems: 'space-around',
@@ -150,30 +298,54 @@ export default class ProfilScreen extends Component {
           <View style={styles.üstbanner}>
             <TouchableOpacity onPress={requestGalleryPermission}>
               <Image
-                source={this.state.profilResmi}
+                source={{uri: name.profil}}
+                //source={this.state.profilResmi}
                 style={{width: 100, height: 100, borderRadius: 400 / 2}}
               />
             </TouchableOpacity>
             <View style={styles.ustbanner2}>
-              <Text style={styles.kullaniciAdi}>Kullanıcı Adı</Text>
+              <Text style={styles.kullaniciAdi}>{name.username}</Text>
               <Image style={styles.imageYildiz} />
             </View>
-            <Text style={styles.degerlendirme}> Değerlendirme></Text>
+            <Text style={styles.degerlendirme}>Kullanıcı Yorumları</Text>
             <Text style={styles.hakkinda}> Hakkımda</Text>
           </View>
         </View>
         <ScrollableTabView
-          style={{marginTop: 5}}
           initialPage={0}
           renderTabBar={() => <ScrollableTabBar />}>
-          <Text tabLabel="Ev Yemekleri">
-            <Image
-              source={avatarSource}
-              style={{width: 200, height: 200, marginLeft: 50}}
+          <View tabLabel="Ev Yemekleri">
+            <FlatList
+              ListFooterComponent={this.renderFooter}
+              //ListHeaderComponent={this.renderHeader()}
+              numColumns={2}
+              renderItem={this.renderContactsItem}
+              data={this.state.all}
             />
-          </Text>
-          <Text tabLabel="Dekorasyon">deko</Text>
-          <Text tabLabel="Benim Hikayem">Benim Hikayem</Text>
+          </View>
+          <View tabLabel="Dekorasyon">
+            <View style={{width: 100, height: 100}}>
+              <Image
+                source={avatarSource}
+                style={{
+                  width: 120,
+                  height: 120,
+                  //marginTop: 2,
+                }}
+              />
+            </View>
+          </View>
+          <View tabLabel="Benim Hikayem">
+            <View style={{width: 100, height: 100}}>
+              <Image
+                source={avatarSource}
+                style={{
+                  width: 120,
+                  height: 120,
+                }}
+              />
+            </View>
+          </View>
         </ScrollableTabView>
       </View>
     );
@@ -186,6 +358,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
     paddingTop: 20,
+  },
+  urunler: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 5,
+  },
+  avatar: {
+    width: 185,
+    height: 170,
   },
   imageBack: {
     width: 100,
@@ -204,6 +386,7 @@ const styles = StyleSheet.create({
   kullaniciAdi: {
     fontSize: 18,
     marginTop: 10,
+    marginLeft: 5,
   },
   imageYildiz: {
     width: 110,
@@ -213,6 +396,7 @@ const styles = StyleSheet.create({
   degerlendirme: {
     marginTop: 45,
     fontSize: 15,
+    marginRight: -40,
   },
   buttonGenel: {
     flexDirection: 'row',
@@ -248,6 +432,6 @@ const styles = StyleSheet.create({
   hakkinda: {
     marginTop: 80,
     paddingRight: 50,
-    marginLeft: -220,
+    marginLeft: -190,
   },
 });

@@ -1,30 +1,35 @@
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
-import ActionButton from 'react-native-action-button';
+import {AppRegistry, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-class hilal extends Component {
+import ActionButton from 'react-native-action-button';
+import {LogBox} from 'react-native';
+
+LogBox.ignoreLogs([
+  'Animated: `useNativeDriver` was not specified. This is a required option and must be explicitly set to `true` or `false',
+]);
+export default class hilal extends Component {
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#f3f3f3'}}>
-        {/* Rest of the app comes ABOVE the action button component !*/}
-        <ActionButton buttonColor="rgba(231,76,60,1)" useNativeDriver={true}>
+      <View style={styles.container}>
+        <Text style={styles.welcome}>Basic Example</Text>
+        <ActionButton buttonColor="rgba(231,76,60,1)">
           <ActionButton.Item
             buttonColor="#9b59b6"
             title="New Task"
             onPress={() => console.log('notes tapped!')}>
-            <Icon name="md-create" style={styles.actionButtonIcon} />
+            <Icon name="add" style={styles.actionButtonIcon} />
           </ActionButton.Item>
           <ActionButton.Item
             buttonColor="#3498db"
             title="Notifications"
             onPress={() => {}}>
-            <Icon name="md-notifications-off" style={styles.actionButtonIcon} />
+            <Icon name="add" style={styles.actionButtonIcon} />
           </ActionButton.Item>
           <ActionButton.Item
             buttonColor="#1abc9c"
             title="All Tasks"
             onPress={() => {}}>
-            <Icon name="md-done-all" style={styles.actionButtonIcon} />
+            <Icon name="add" style={styles.actionButtonIcon} />
           </ActionButton.Item>
         </ActionButton>
       </View>
@@ -33,6 +38,17 @@ class hilal extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
   actionButtonIcon: {
     fontSize: 20,
     height: 22,

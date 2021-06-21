@@ -8,12 +8,12 @@ import {
   Image,
   PermissionsAndroid,
   Platform,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-//import ImagePicker from 'react-native-image-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -24,6 +24,7 @@ const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 import axios from 'axios';
 import ImagePicker from 'react-native-image-crop-picker';
+import CameraAddition from './CameraAdditions';
 export default class CameraAndGallery extends Component {
   mediaType: any;
   constructor() {
@@ -37,6 +38,7 @@ export default class CameraAndGallery extends Component {
       avatarSource: null,
       loading: false,
       data: '',
+      camresim: '',
       //response: null,
     };
   }
@@ -52,7 +54,6 @@ export default class CameraAndGallery extends Component {
     const baseURL =
       'http://213.159.30.21/service/api/Urun/' + apiRequestUrl + '/resim/';
     console.log(baseURL);
-    console.log('seymo');
     this.setState({
       avatarSource: null,
       loading: true,
@@ -63,14 +64,12 @@ export default class CameraAndGallery extends Component {
       type: response.type,
       name: response.fileName,
     });
-    console.log('anamm');
     const config = {
       headers: {
         Accept: 'application/json',
         'Content-type': 'multipart/form-data',
       },
     };
-    console.log('deneme');
     axios
       .post(baseURL, data, config)
       .then((res) => {
@@ -79,7 +78,6 @@ export default class CameraAndGallery extends Component {
           avatarSource: source,
           loading: false,
         });
-        //console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -98,7 +96,6 @@ export default class CameraAndGallery extends Component {
       adi,
       kategori,
     });
-    //this.props.navigation.navigate('OnizlemeEkrani', foto);
   };
   requestWriteExternalStoragePermission = async () => {
     try {
@@ -107,9 +104,9 @@ export default class CameraAndGallery extends Component {
       );
 
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        //console.log('You can use the camera');
+        console.log('You can use the camera');
       } else {
-        //console.log('Camera permission denied');
+        console.log('Camera permission denied');
       }
     } catch (err) {
       console.warn(err);
@@ -127,23 +124,15 @@ export default class CameraAndGallery extends Component {
       }
 
       const data = await this.camera.takePictureAsync(options);
-
       CameraRoll.save(data.uri, 'photo')
         .then(() => {
           Alert.alert('Selam!', 'Şaheserinize galeriden ulaşabilirsiniz');
-          //alert('Success');
-          //this.navigateToInformationPage(data);
         })
         .catch((e) => {
-          //alert('err');
           console.log(e);
         });
     }
   };
-  /*navigateToInformationPage = (foto) => {
-    this.props.navigation.navigate('AciklamaEkrani', foto);
-    //this.props.navigation.navigate('OnizlemeEkrani', foto);
-  };*/
   change(nativeEvent) {
     if (nativeEvent) {
       const slide = Math.ceil(
@@ -184,26 +173,6 @@ export default class CameraAndGallery extends Component {
       });
   }
 
-  renderVideo(video) {
-    console.log('rendering video');
-    return (
-      <View style={{height: 300, width: 200}}>
-        <Video
-          source={{uri: video.uri, type: video.mime}}
-          style={{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}
-          rate={1}
-          paused={false}
-          volume={1}
-          muted={false}
-          resizeMode={'cover'}
-          onError={(e) => console.log(e)}
-          onLoad={(load) => console.log(load)}
-          repeat={true}
-        />
-      </View>
-    );
-  }
-
   renderImage(image) {
     return (
       <Image
@@ -236,6 +205,7 @@ export default class CameraAndGallery extends Component {
     }
   }
   render() {
+    const {navigate} = this.props.navigation;
     const {active, avatarSource, loading} = this.state;
     const requestGalleryPermission = async () => {
       try {
@@ -267,20 +237,9 @@ export default class CameraAndGallery extends Component {
               allowsEditing: true, //olmuyo cunku androidde yok
             },
           };
-          //console.log('İzin verildi');
           launchImageLibrary(options, (response) => {
             console.log('Response = ', response);
-            //const source = {uri: response.uri};
-            console.log('of niye olmuyo ya');
-            /*this.setState({
-              avatarSource: source,
-            });*/
-            //upload başarılı değilse görünmesin diye yorum satırı yaptım
-            //this.cropLast(source);
-            //this.cropLast();
             this.uploadPhoto(response);
-            console.log('nolcak');
-            //}
           });
         } else {
           console.log('İzin verilmedi');
@@ -293,9 +252,9 @@ export default class CameraAndGallery extends Component {
       <View style={styles.container}>
         <Header
           leftComponent={{
-            icon: 'close',
+            icon: 'arrow-back',
             color: '#fff',
-            //onPress: () => this.goGallery(),
+            onPress: () => navigate('KategoriSecme'),
           }}
           centerComponent={
             <Icon
@@ -321,7 +280,6 @@ export default class CameraAndGallery extends Component {
             ref={(ref) => {
               this.camera = ref;
             }}
-            //type={RNCamera.Constants.Type.back}
             type={this.state.cameraType}
             flashMode={RNCamera.Constants.FlashMode.off}
             mirrorImage={this.state.mirrorMode}
@@ -389,7 +347,6 @@ const styles = StyleSheet.create({
   },
   preview: {
     height: width,
-    //marginTop: 15,
   },
   button: {
     backgroundColor: 'blue',

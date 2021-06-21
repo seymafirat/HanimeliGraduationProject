@@ -7,9 +7,14 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button,
+  SafeAreaView,
+  StatusBar,
 } from 'react-native';
+import LottieView from 'lottie-react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import Video from 'react-native-video';
+import hilal from './hilal';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,13 +23,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: 'red',
     marginBottom: 10,
   },
   text: {
     color: 'white',
     fontSize: 20,
     textAlign: 'center',
+  },
+  safeAreaView: {
+    margin: 22,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    marginTop: 8,
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#666',
+    marginBottom: -50,
+  },
+  lottieView: {
+    height: 300,
   },
 });
 
@@ -109,7 +134,7 @@ export default class App extends Component {
           resizeMode={'cover'}
           onError={(e) => console.log(e)}
           onLoad={(load) => console.log(load)}
-          repeat={true}
+          repeat={false}
         />
       </View>
     );
@@ -143,17 +168,40 @@ export default class App extends Component {
               ))
             : null}
         </ScrollView>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView style={styles.safeAreaView}>
+          <Text style={styles.title}>Beraberken Daha Güçlüyüz💪🏻</Text>
+          <Text style={styles.subtitle}>
+            Bizimle hikayenizi, deneyimlerinizi paylaşabilirsiniz.
+          </Text>
+          <LottieView
+            style={styles.lottieView}
+            source={require('../animations/1919-share-the-love.json')}
+            autoPlay
+            loop
+          />
+        </SafeAreaView>
+        <TouchableOpacity
+          onPress={
+            () => this.props.navigation.navigate('FunStoryAdd')
+            //this.pickSingleWithCamera(false, (mediaType = 'video'))
+          }
+          style={styles.button}>
+          <Text style={styles.text}>
+            Yazmak İstiyorum Diyenleri Böyle Alalım!
+          </Text>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
             this.pickSingleWithCamera(false, (mediaType = 'video'))
           }
           style={styles.button}>
-          <Text style={styles.text}>Select Single Video With Camera</Text>
+          <Text style={styles.text}>Video Çekmek İstiyorum!</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => this.pickSingle(false)}
-          style={styles.button}>
-          <Text style={styles.text}>Select Single</Text>
+          style={styles.button}
+          onPress={() => this.pickSingle(false)}>
+          <Text style={styles.text}>Video Yüklemek İstiyorum!</Text>
         </TouchableOpacity>
       </View>
     );

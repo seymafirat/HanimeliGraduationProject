@@ -41,7 +41,9 @@ class Login extends React.Component {
           AsyncStorage.setItem('token', res.data.access).then((res) => {
             alert('Login successful');
             console.log(req);
-            this.props.navigation.navigate('deneme');
+            this.props.navigation.navigate('Home', {
+              username,
+            });
             this.setState({
               isLoading: false,
             });

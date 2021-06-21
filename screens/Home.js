@@ -29,13 +29,11 @@ export default class Home extends Component {
             tabLabel="Anasayfa"
             navigation={this.props.navigation}
           />
-          <DesignProducts
-            tabLabel=" Tasarım & Dekorasyon"
-            navigation={this.props.navigation}
-          />
-          <DietProducts tabLabel="Diyet" navigation={this.props.navigation} />
-          <BabyProducts tabLabel="Bebek" navigation={this.props.navigation} />
-          <Foods tabLabel=" Ev Yemekleri" navigation={this.props.navigation} />
+          <DesignProducts tabLabel=" Tasarım & Dekorasyon" />
+          <HandworkProducts tabLabel="Örgü" />
+          <Foods tabLabel=" Ev Yemekleri" />
+          <DietProducts tabLabel="Diyet" />
+          <BabyProducts tabLabel="Bebek" />
         </ScrollableTabView>
       </View>
     );

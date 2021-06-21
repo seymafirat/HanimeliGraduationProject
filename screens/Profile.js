@@ -9,7 +9,7 @@ export default class Profile extends Component {
     contacts: [],
   };
   componentDidMount() {
-    axios.get('http://213.159.30.21/service/api/Urun/').then((user) => {
+    axios.get('http://213.159.30.21/auth/users/4/').then((user) => {
       console.log(user);
       this.setState({
         all: user.data,

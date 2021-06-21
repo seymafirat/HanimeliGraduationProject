@@ -4,23 +4,9 @@ import {
   Text,
   View,
   TextInput,
-  Button,
-  Platform,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  Alert,
   ScrollView,
   Keyboard,
 } from 'react-native';
-import {styles} from './styles';
-import {createSwitchNavigator, createAppContainer} from 'react-navigation';
-import Icon from 'react-native-vector-icons/Ionicons';
-//import Home from './Home';
-//import VerilerGelsin from './VerilerGelsin';
-//import OnizlemeEkrani from './OnizlemeEkrani';
-//import axios from 'axios';
-//import {withNavigation} from 'react-navigation';
 import {Header} from 'react-native-elements';
 export default class AciklamaEkrani extends Component {
   constructor(props) {
@@ -33,38 +19,6 @@ export default class AciklamaEkrani extends Component {
       lastId: '',
     };
   }
-  /*componentDidMount() {
-    this.extractRequiredImageData();
-  }
-
-  extractRequiredImageData = () => {
-    let data = this.props.navigation.state.params;
-    let imageList = [];
-
-    for (let i = 0; i < Object.keys(data).length; i++) {
-      let foto = data[String(i)];
-      let image = {
-        id: String(i),
-        contentType: foto.mime,
-        fileSize: foto.size,
-        filePath: foto.path,
-      };
-      console.log(foto.path);
-
-      if (Platform.OS === 'android') {
-        image.fileName = foto.filename;
-      } else {
-        let path = foto.path.split('/');
-        image.fileName = path[path.length - 1];
-      }
-
-      imageList.push(image);
-    }
-    this.setState({
-      imageList,
-    });
-  };
-*/
   checkInput = () => {
     var fiyat = this.state.textFiyat;
     var baslik = this.state.textBaslik;
@@ -76,31 +30,15 @@ export default class AciklamaEkrani extends Component {
     } else if (!aciklama.trim()) {
       this.setState({msg: 'Ürün Açıklaması boş olamaz'});
     } else {
-      this.setState({msg: 'success'});
+      this.props.navigation.navigate('KategoriSecme', {
+        //apiRequestUrl: JSON.parse(data.id),
+        adi: this.state.textBaslik,
+        aciklama: this.state.aciklama,
+        fiyat: this.state.textFiyat,
+      });
     }
     Keyboard.dismiss();
   };
-
-  buttonClickListener = () => {
-    //const {textBaslik} = this.state;
-    //var baslik = this.state.textBaslik;
-    //var aciklama = this.state.aciklama;
-    //this.props.navigation.navigate('OnizlemeEkrani', baslik);
-    //this.props.navigation.navigate('OnizlemeEkrani', aciklama);
-    //Alert.alert(textBaslik);
-  };
-  InsertData = () => {
-    this.props.navigation.navigate('KategoriSecme', {
-      //apiRequestUrl: JSON.parse(data.id),
-      adi: this.state.textBaslik,
-      aciklama: this.state.aciklama,
-      fiyat: this.state.textFiyat,
-    });
-  };
-  //this.props.navigation.navigate('OnizlemeEkrani');
-  //Alert.alert('adi:' + data.adi + 'aciklama:' + data.aciklama);
-  //})
-  //.catch((error) => console.log(error));
   render() {
     return (
       <View style={styles.aciklamaContainer}>
@@ -110,18 +48,18 @@ export default class AciklamaEkrani extends Component {
             leftComponent={{
               icon: 'arrow-back',
               color: 'black',
-              //onPress: () => this.goGallery(),
+              onPress: () => this.props.navigation.navigate('Home'),
             }}
             centerComponent={{
               text: 'Detaylar',
-              style: {fontSize: 20, marginTop: -2},
+              style: {fontSize: 20, marginTop: -2, fontWeight: 'bold'},
             }}
             rightComponent={{
               text: 'Devam',
               color: 'black',
               style: {fontSize: 16},
               //onPress: this.checkInput,
-              onPress: this.InsertData,
+              onPress: this.checkInput,
             }}
             containerStyle={{
               backgroundColor: 'white',
@@ -176,7 +114,6 @@ export default class AciklamaEkrani extends Component {
               value={this.state.textFiyat}
               multiline={true}
               textAlignVertical={'top'}
-              //ref={this.props.inputRef}
               onChangeText={(textFiyat) => this.setState({textFiyat})}
               returnKeyType={'next'} //klavyede aşağıda ok yerinde bu yazsın androidde oklar değişiyo
               autoCapitalize="none"
@@ -190,3 +127,92 @@ export default class AciklamaEkrani extends Component {
     );
   }
 }
+const styles = StyleSheet.create({
+  aciklamaContainer: {
+    flex: 1,
+  },
+  urunBasligi: {
+    height: 105,
+    marginHorizontal: 5,
+    marginVertical: 140,
+    backgroundColor: 'white',
+    //#dcdcdc
+    borderRadius: 5,
+    shadowColor: 'black',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    marginTop: 10,
+  },
+  urunBasligiText: {
+    fontSize: 20,
+    marginTop: 20,
+    marginLeft: 5,
+  },
+  inputUrunBasligi: {
+    height: 105,
+    paddingHorizontal: 5,
+    borderWidth: 2,
+    borderRadius: 4,
+    borderColor: '#dcdcdc',
+    shadowColor: '#dcdcdc',
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    color: '#999',
+    marginBottom: 12,
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  urunAciklama: {
+    height: 155,
+    marginHorizontal: 5,
+    marginVertical: 140,
+    backgroundColor: 'white',
+    //#dcdcdc
+    borderRadius: 5,
+    shadowColor: 'black',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    marginTop: -70,
+  },
+  inputAciklama: {
+    height: 155,
+    paddingHorizontal: 5,
+    borderWidth: 2,
+    borderRadius: 4,
+    borderColor: '#dcdcdc',
+    shadowColor: '#dcdcdc',
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    color: '#999',
+    marginBottom: 12,
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  urunAciklamaText: {
+    fontSize: 20,
+    marginLeft: 5,
+    marginTop: -28,
+  },
+  inputFiyat: {
+    backgroundColor: 'white',
+    height: 55,
+    paddingHorizontal: 5,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: '#dcdcdc',
+    shadowColor: '#dcdcdc',
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    color: '#999',
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 12,
+    marginTop: 5,
+    marginHorizontal: 5,
+  },
+  urunFiyatText: {
+    fontSize: 20,
+    marginLeft: 5,
+    marginTop: -100,
+  },
+});

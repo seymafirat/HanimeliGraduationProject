@@ -113,7 +113,7 @@ export default class detayekrani extends Component {
                           key={index}
                           resizeMode="stretch"
                           style={styles.wrap}
-                          source={require('assets/ben/category-foods.jpg')}
+                          source={require('./assets/profilfoto.jpg')}
                         />
                       ))}
                     </ScrollView>

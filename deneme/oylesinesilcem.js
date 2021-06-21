@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+/*import React, {useState} from 'react';
 import {Button, SafeAreaView, Alert, useColorScheme, View} from 'react-native';
 
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -84,4 +84,4 @@ export default function App() {
       </View>
     </SafeAreaView>
   );
-}
+}*/

@@ -11,8 +11,10 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-import {styles} from './styles';
+//import {styles} from './styles';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {Header} from 'react-native-elements';
 export default class OnizlemeEkrani extends Component {
   constructor(props) {
     super();
@@ -28,22 +30,11 @@ export default class OnizlemeEkrani extends Component {
     const ad = getParam('adi');
     const aciklama = getParam('aciklama');
     const fiyat = getParam('fiyat');
-    /*resim = {
-      uri: response.uri,
-      type: response.mime,
-      name: response.fileName,
-    };*/
-    // const newImage = ...resim;
+
     const formData = new FormData();
     formData.append('adi', ad);
     formData.append('aciklama', aciklama);
     formData.append('fiyat', fiyat);
-    //    formData.append('resim', resim);
-    /*resim,
-      uri: resim.uri, // dosyanın yolu
-      type: resim.type, // dosyanın mimeType değeri
-      name: resim.name || `auto-file-${+new Date()}`,
-    });*/
     formData.append('aktifmi', true);
     formData.append('stok', 5);
     formData.append('userid', 3);
@@ -54,7 +45,6 @@ export default class OnizlemeEkrani extends Component {
       .post('http://213.159.30.21/service/api/Urun/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          //Accept: 'application/json',
         },
       })
       .then((response) => {
@@ -65,60 +55,6 @@ export default class OnizlemeEkrani extends Component {
         console.log(error);
         console.log('no');
       });
-    /*componentDidMount() {
-      this.extractRequiredImageData();
-    }
-
-    extractRequiredImageData = () => {
-      let data = this.props.navigation.state.params;
-      let imageList = [];
-
-      for (let i = 0; i < Object.keys(data).length; i++) {
-        let foto = data[String(i)];
-        let image = {
-          id: String(i),
-          contentType: foto.mime,
-          fileSize: foto.size,
-          filePath: foto.path,
-        };
-        console.log(foto.path);
-
-        if (Platform.OS === 'android') {
-          image.fileName = foto.filename;
-        } else {
-          let path = foto.path.split('/');
-          image.fileName = path[path.length - 1];
-        }
-
-        imageList.push(image);
-      }
-      this.setState({
-        imageList,
-      });
-    };*/
-    /*componentDidMount() {
-      this.getContacts();
-    }
-
-    getContacts = async () => {
-      const {
-        data: {results: infoList},
-      } = await axios.get('https://randomuser.me/api/?results=30');
-      this.setState({
-        infoList,
-        //loading: false,
-      });
-    };*/
-
-    /*async makeRequests() {
-      let [u1, u2] = await Promise.all([
-        axios.get('https://api.github.com/users/janbodnar'),
-        axios.get('https://api.github.com/users/symfony'),
-      ]);
-
-      //console.log(`Jan Bodnar: ${u1.data.created_at}`);
-      //console.log(`Symfony: ${u2.data.created_at}`);
-    }*/
   };
   navigateToProfileScreen = () => {
     const {getParam} = this.props.navigation;
@@ -134,10 +70,26 @@ export default class OnizlemeEkrani extends Component {
     const fiyat = getParam('fiyat');
     const avatarSource = getParam('avatarSource');
     const kategori = getParam('kategori');
-    //const adi = this.props.navigation.state.params;
-    //const aciklama = this.props.navigation.state.params;
+
     return (
       <View style={styles.OnizlemeEkraniContainer}>
+        <Header
+          placement={'left'}
+          leftComponent={{
+            icon: 'arrow-back',
+            color: 'black',
+            onPress: () => this.props.navigation.navigate('CameraAndGallery'),
+          }}
+          centerComponent={{
+            text: 'Önizleme Ekranı',
+            style: {fontSize: 20, marginTop: -1, fontWeight: 'bold'},
+          }}
+          containerStyle={{
+            backgroundColor: 'white',
+            alignItems: 'space-around',
+            marginTop: -10,
+          }}
+        />
         <View style={styles.FotografEkrani}>
           <Text style={{fontSize: 18, fontWeight: 'bold'}}>Fotoğraflar</Text>
           <View style={styles.avatarContainer}>
@@ -183,4 +135,104 @@ export default class OnizlemeEkrani extends Component {
   };
 }
 
-//const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  OnizlemeEkraniContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    marginTop: 10,
+  },
+  FotografEkrani: {
+    backgroundColor: 'white',
+    height: 135,
+    paddingHorizontal: 5,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: '#dcdcdc',
+    shadowColor: '#dcdcdc',
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    color: '#999',
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 12,
+    marginTop: 7,
+    marginHorizontal: 5,
+  },
+  EkleDuzenle: {
+    marginLeft: 300,
+    marginTop: -20,
+  },
+  BaslikKontrol: {
+    backgroundColor: 'white',
+    height: 75,
+    paddingHorizontal: 5,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: '#dcdcdc',
+    shadowColor: '#dcdcdc',
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    color: '#999',
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 12,
+    marginTop: 5,
+    marginHorizontal: 5,
+  },
+  AciklamaKontrol: {
+    backgroundColor: 'white',
+    height: 105,
+    paddingHorizontal: 5,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: '#dcdcdc',
+    shadowColor: '#dcdcdc',
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    color: '#999',
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 12,
+    marginTop: 5,
+    marginHorizontal: 5,
+  },
+  KategoriKontrol: {
+    backgroundColor: 'white',
+    height: 75,
+    paddingHorizontal: 5,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: '#dcdcdc',
+    shadowColor: '#dcdcdc',
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    color: '#999',
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 12,
+    marginTop: 5,
+    marginHorizontal: 5,
+  },
+  FiyatKontrol: {
+    backgroundColor: 'white',
+    height: 75,
+    paddingHorizontal: 5,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: '#dcdcdc',
+    shadowColor: '#dcdcdc',
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    color: '#999',
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 12,
+    marginTop: 5,
+    marginHorizontal: 5,
+  },
+  Onay: {
+    backgroundColor: 'red',
+    width: '100%',
+    height: 40,
+  },
+});

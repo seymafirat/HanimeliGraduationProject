@@ -228,6 +228,7 @@ export const styles = StyleSheet.create({
   OnizlemeEkraniContainer: {
     flex: 1,
     backgroundColor: 'white',
+    marginTop: 10,
   },
   FotografEkrani: {
     backgroundColor: 'white',
