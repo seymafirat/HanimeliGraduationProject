@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   Image,
+  Alert,
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -39,7 +40,7 @@ class Login extends React.Component {
       axios.post('http://213.159.30.21/auth/token/', req).then(
         (res) => {
           AsyncStorage.setItem('token', res.data.access).then((res) => {
-            alert('Login successful');
+            //            alert('Login successful');
             console.log(req);
             this.props.navigation.navigate('Home', {
               username,
@@ -50,14 +51,14 @@ class Login extends React.Component {
           });
         },
         (err) => {
-          alert('Incorrect username or password!');
+          Alert.alert('Uyarı', 'Kullanıcı adı veya parola hatalı');
           this.setState({
             isLoading: false,
           });
         },
       );
     } else {
-      alert("Username or password can't be empty");
+      Alert.alert('Uyarı', 'Kullanıcı adı veya parola boş olmamalıdır!');
     }
   }
 
@@ -72,14 +73,14 @@ class Login extends React.Component {
         <View style={styles.loginWrap}>
           <TextInput
             style={styles.inputs}
-            placeholder="Enter username"
+            placeholder="Kullanıcı adınızı giriniz"
             placeholderTextColor="#333"
             value={username}
             onChangeText={(text) => this.onChangeHandler('username', text)}
           />
           <TextInput
             style={styles.inputs}
-            placeholder="Enter password"
+            placeholder="Parolanızı giriniz"
             placeholderTextColor="#333"
             secureTextEntry={true}
             value={password}

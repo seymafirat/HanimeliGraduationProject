@@ -59,9 +59,7 @@ export default class OnizlemeEkrani extends Component {
   navigateToProfileScreen = () => {
     const {getParam} = this.props.navigation;
     const avatarSource = getParam('avatarSource');
-    this.props.navigation.navigate('ProfilScreen', {
-      avatarSource,
-    });
+    this.props.navigation.navigate('ProfilScreen');
   };
   render = () => {
     const {getParam} = this.props.navigation;
@@ -108,10 +106,6 @@ export default class OnizlemeEkrani extends Component {
             Ürün Açıklaması
           </Text>
           <Text style={{fontSize: 20, marginTop: 10}}>{aciklama}</Text>
-        </View>
-        <View style={styles.KategoriKontrol}>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>Kategori</Text>
-          <Text style={{fontSize: 20, marginTop: 10}}>{kategori}</Text>
         </View>
         <View style={styles.FiyatKontrol}>
           <Text style={{fontSize: 18, fontWeight: 'bold'}}>Ürünün Fiyatı</Text>

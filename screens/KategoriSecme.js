@@ -19,7 +19,6 @@ export default class ListAvatarExample extends Component {
     super();
     this.state = {
       categoryInput: ' ',
-      userid
     };
   }
   InsertData = (kategoriId) => {
@@ -35,11 +34,8 @@ export default class ListAvatarExample extends Component {
         'Content-type': 'application/json',
       },
       body: JSON.stringify({
-        userid: 4,
+        userid: 'pnarbedir_',
         //username: userid.username,
-        // userid.id : 4
-        username: userid.id,
-        id:userid.username,
         stok: 1,
         kategoriId,
         altkategoriId: 2,
@@ -63,7 +59,7 @@ export default class ListAvatarExample extends Component {
           adi,
           aciklama,
           fiyat,
-          kategori: 'Yemek',
+          kategoriId,
         });
         console.log('seyma' + JSON.parse(data.id));
       })

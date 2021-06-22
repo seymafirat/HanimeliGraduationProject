@@ -24,7 +24,7 @@ const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 import axios from 'axios';
 import ImagePicker from 'react-native-image-crop-picker';
-export default class CameraAndGallery extends Component {
+export default class FunCam extends Component {
   mediaType: any;
   constructor() {
     super();
@@ -48,6 +48,7 @@ export default class CameraAndGallery extends Component {
     const fiyat = getParam('fiyat');
     const kategori = getParam('kategori');
     const apiRequestUrl = getParam('apiRequestUrl');
+    console.log('eslem');
     console.log(apiRequestUrl);
     const baseURL =
       'http://213.159.30.21/service/api/Urun/' + apiRequestUrl + '/resim/';
@@ -87,13 +88,7 @@ export default class CameraAndGallery extends Component {
     const aciklama = getParam('aciklama');
     const fiyat = getParam('fiyat');
     const kategori = getParam('kategori');
-    this.props.navigation.navigate('OnizlemeEkrani', {
-      avatarSource: this.state.avatarSource,
-      aciklama,
-      fiyat,
-      adi,
-      kategori,
-    });
+    this.props.navigation.navigate('TheBest');
   };
   requestWriteExternalStoragePermission = async () => {
     try {
@@ -189,10 +184,12 @@ export default class CameraAndGallery extends Component {
   }
   changeCameraType() {
     if (this.state.cameraType == 'back') {
+      console.log('doki');
       this.setState({
         cameraType: 'front',
         mirrorMode: true,
       });
+      console.log('oki');
     } else {
       this.setState({
         cameraType: 'back',
@@ -250,7 +247,7 @@ export default class CameraAndGallery extends Component {
           leftComponent={{
             icon: 'arrow-back',
             color: '#fff',
-            onPress: () => navigate('KategoriSecme'),
+            onPress: () => navigate('FunStoryAdd'),
           }}
           centerComponent={
             <Icon

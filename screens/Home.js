@@ -26,6 +26,10 @@ export default class Home extends Component {
       images: [
         require('../assets/ben/category-foods.jpg'),
         require('../assets/ben/category-designs.jpg'),
+        require('../assets/kayan3.png'),
+        require('../assets/kayan4.png'),
+        require('../assets/kayan5.png'),
+        require('../assets/kayan6.png'),
       ],
       name: '',
       surname: '',
@@ -156,17 +160,13 @@ export default class Home extends Component {
           //tabBarActiveTextColor="#009387"
           //tabBarInactiveTextColor="#808080"
           renderTabBar={() => <ScrollableTabBar />}>
-          <AnasayfaScreen
-            tabLabel="Anasayfa"
-            navigation={this.props.navigation}
-          />
+          <AnasayfaScreen tabLabel="Yemek" navigation={this.props.navigation} />
           <DesignProducts
             tabLabel=" Tasarım & Dekorasyon"
             navigation={this.props.navigation}
           />
           <DietProducts tabLabel="Diyet" navigation={this.props.navigation} />
           <BabyProducts tabLabel="Bebek" navigation={this.props.navigation} />
-          <Foods tabLabel=" Ev Yemekleri" navigation={this.props.navigation} />
         </ScrollableTabView>
         <ActionButton style={{marginTop: 50}} buttonColor="rgba(231,76,60,1)">
           <ActionButton.Item
@@ -183,7 +183,7 @@ export default class Home extends Component {
           <ActionButton.Item
             buttonColor="#3498db"
             title="Eğlence"
-            onPress={() => this.props.navigation.navigate('VideoPage')}>
+            onPress={() => this.props.navigation.navigate('FunStoryAdd')}>
             <Icon
               name="happy"
               color={'white'}

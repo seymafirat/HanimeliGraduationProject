@@ -11,6 +11,7 @@ import {
   Button,
   Dimensions,
   RefreshControl,
+  ScrollView,
 } from 'react-native';
 var {width} = Dimensions.get('window');
 import axios from 'axios';
@@ -101,7 +102,7 @@ export default class Flat extends Component {
     const detailimage = navigation.getParam('detailimage');
     const detailaciklama = navigation.getParam('detailaciklama');
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text>{this.state.dene}</Text>
         <View style={styles.avatarandtext}>
           <Image style={styles.avatar} source={{uri: detailimage}} />
@@ -150,7 +151,7 @@ export default class Flat extends Component {
             />
           }
         />
-      </View>
+      </ScrollView>
     );
   }
 }

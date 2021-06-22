@@ -32,7 +32,7 @@ export default class AnasayfaScreen extends Component {
   };
 
   componentDidMount() {
-    axios.get('http://213.159.30.21/service/api/Urun/').then((user) => {
+    axios.get('http://213.159.30.21/service/yemek/list/').then((user) => {
       console.log(user);
       this.setState({
         all: user.data,
@@ -122,7 +122,16 @@ export default class AnasayfaScreen extends Component {
           style={[styles.itemContainer, {backgroundColor: '#fafafa'}]}>
           <View style={styles.container}>
             <View style={styles.general}>
-              {/*<Text style>{item.userid.id}</Text>*/}
+              <View
+                style={{
+                  border: 2,
+                  borderColor: '#7f7f7f',
+                  borderWidth: 2,
+                  flexDirection: 'row',
+                }}>
+                <Icon name="person" size={22} color={'black'} />
+                <Text style={{fontSize: 15}}>{item.userid}</Text>
+              </View>
               <Image style={styles.avatar} source={{uri: item.resim}} />
               <View style={styles.textContainer}>
                 <Text style={styles.name}>
@@ -252,10 +261,11 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     marginVertical: 10,
-    padding: 10,
+    padding: 5,
     borderWidth: 1,
     borderColor: '#969696',
     borderRadius: 15,
+    height: 50,
   },
   searchInput: {
     fontSize: 16,

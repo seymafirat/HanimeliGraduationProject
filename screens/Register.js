@@ -12,6 +12,7 @@ import {
   TextInput,
   Button,
   Keyboard,
+  Alert,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
@@ -46,11 +47,11 @@ export default class Register extends Component {
       .then((resp) => resp.json())
       .then((data) => {
         console.log(data);
-        //alert('ok');
-        console.log('ok');
+        // Alert.alert('Mesaj', 'Hoşgeldiniz!');
+        this.props.navigation.navigate('Login');
+
       })
       .catch((error) => {
-        console.log('ya amk');
         console.log(error);
       });
   };
@@ -157,8 +158,7 @@ export default class Register extends Component {
                   onPress={() => this.InsertData()}
                 />
                 <TouchableOpacity
-                //onPress={() => this.props.navigation.navigate('deneme')}
-                >
+                  onPress={() => this.props.navigation.navigate('Login')}>
                   <Text style={{fontSize: 16, color: 'black', marginLeft: 70}}>
                     Zaten Üye misin? Giriş Yap
                   </Text>

@@ -40,6 +40,9 @@ import HanimeliSupport from './HanimeliSupport';
 import TheBest from './TheBest';
 import AyarlarScreen from './AyarlarScreen';
 import HolidayMood from './HolidayMood';
+import FunCam from './FunCam';
+import FunStoryAdd from './FunStoryAdd';
+import VideoPlayer from './VideoPlayer';
 
 const BeforeSignin = createStackNavigator(
   {
@@ -148,15 +151,18 @@ const AppNavigator = createStackNavigator(
     Foods: Foods,
     KategoriScreen: KategoriScreen,
     BabyProducts: BabyProducts,
-    DesignProducts: TabNavigator,
+    DesignProducts: DesignProducts,
     DietProducts: DietProducts,
     HanimeliSupport: HanimeliSupport,
     TheBest: TheBest,
     TumAyarlar: AyarlarStack,
+    FunCam: FunCam,
+    FunStoryAdd: FunStoryAdd,
+    VideoPlayer: VideoPlayer,
   },
   {
     headerMode: 'none',
-    initialRouteName: 'Home',
+    initialRouteName: 'Register',
   },
 );
 const Drawer = createDrawerNavigator(
