@@ -14,7 +14,10 @@ import {Header} from 'react-native-elements';
 import {Icon} from 'react-native-elements';
 import {Alert, StyleSheet} from 'react-native';
 import AciklamaEkrani from './AciklamaEkrani';
-export default class ListAvatarExample extends Component {
+import AsyncStorage from '@react-native-community/async-storage';
+const token = AsyncStorage.getItem('token');
+console.log(token);
+export default class KategoriSecme extends Component {
   constructor() {
     super();
     this.state = {
@@ -34,11 +37,8 @@ export default class ListAvatarExample extends Component {
         'Content-type': 'application/json',
       },
       body: JSON.stringify({
-        userid: 'pnarbedir_',
-        //username: userid.username,
-        stok: 1,
+        token,
         kategoriId,
-        altkategoriId: 2,
         adi,
         aciklama,
         fiyat,

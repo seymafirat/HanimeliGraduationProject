@@ -9,6 +9,9 @@ import {
 } from 'react-native';
 import {Header} from 'react-native-elements';
 import LottieView from 'lottie-react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+const token = AsyncStorage.getItem('token');
+console.log(token);
 export default class FunStoryAdd extends Component {
   constructor(props) {
     super(props);
@@ -29,10 +32,8 @@ export default class FunStoryAdd extends Component {
         'Content-type': 'application/json',
       },
       body: JSON.stringify({
-        userid: 4,
+        userid: token,
         //username: userid.username,
-        kategoriId: 6,
-        altkategoriId: 2,
         adi: this.state.textBaslik,
         aciklama: this.state.aciklama,
       }),
@@ -51,7 +52,6 @@ export default class FunStoryAdd extends Component {
           apiRequestUrl: JSON.parse(data.id),
           adi: this.state.textBaslik,
           aciklama: this.state.aciklama,
-          kategoriId: 6,
         });
         console.log('seyma' + JSON.parse(data.id));
       })

@@ -24,6 +24,7 @@ import {Avatar} from 'react-native-elements';
 import axios from 'axios';
 import {launchImageLibrary} from 'react-native-image-picker';
 import AsyncStorage from '@react-native-community/async-storage';
+import uri from 'react-native-fetch-blob/utils/uri';
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const token = AsyncStorage.getItem('token');
@@ -49,7 +50,7 @@ export default class ProfilScreen extends Component {
     };
   }
   componentDidMount() {
-    axios.get('http://213.159.30.21/auth/users/10/').then((user) => {
+    axios.get('http://213.159.30.21/auth/users/' + token).then((user) => {
       //console.log(user.data);
       this.setState({
         name: user.data,
@@ -126,7 +127,7 @@ export default class ProfilScreen extends Component {
   renderContactsItem = ({item, index}) => {
     const {navigate} = this.props.navigation;
     const {name, surname, resim, loading} = this.state;
-    if (item.userid == 'zehra34') {
+    if (item.userid == token) {
       return (
         <View>
           <TouchableOpacity
@@ -216,7 +217,11 @@ export default class ProfilScreen extends Component {
       },
     };
     axios
-      .put('http://213.159.30.21/auth/users/3/profil/', data, config)
+      .put(
+        'http://213.159.30.21/auth/users/' + token + '/profil/',
+        data,
+        config,
+      )
       .then((res) => {
         const source = {uri: response.uri};
         console.log(source);
@@ -298,9 +303,8 @@ export default class ProfilScreen extends Component {
           <View style={styles.üstbanner}>
             <TouchableOpacity onPress={requestGalleryPermission}>
               <Image
-                //source={{uri: name.profil}}
+                source={{uri: name.profil}}
                 //source={this.state.profilResmi}
-                source={require('../assets/profilephoto.jpg')}
                 style={{width: 100, height: 100, borderRadius: 400 / 2}}
               />
             </TouchableOpacity>
